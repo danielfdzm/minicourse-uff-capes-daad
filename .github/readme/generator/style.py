@@ -1,5 +1,6 @@
 """Restrained scientific styling for the README graphics."""
 import subprocess
+from pathlib import Path
 
 import matplotlib
 matplotlib.use("Agg")
@@ -19,6 +20,10 @@ LABEL = "#526170"
 BLUE = "#4D708A"
 RUST = "#A47758"
 LIGHT = "#F3F5F6"
+
+# Render at native UHD resolution; never enlarge a low-resolution raster.
+ANIMATION_FIGSIZE = (8, 4.5)
+ANIMATION_DPI = 480
 
 # Monotonic light-to-dark ramps: larger values have more visual weight.
 SOLUTION_CMAP = LinearSegmentedColormap.from_list("solution", ["#E5EBEF", "#98AFBE", "#4D708A"])
@@ -64,17 +69,30 @@ def fig_to_image(fig, size=None):
     return img
 
 
-def save_gif(frames, path, durations, colors=128):
-    """Quantise frames to one shared adaptive palette and write a looping GIF."""
-    sample = Image.new("RGB", (frames[0].width, frames[0].height * min(len(frames), 6)))
-    step = max(1, len(frames) // 6)
-    for k, fr in enumerate(frames[::step][:6]):
-        sample.paste(fr, (0, k * frames[0].height))
+def save_gif(frames, path, durations, colors=256):
+    """Write a UHD GIF with a stable full palette and a lossless final still.
+
+    Every frame contributes to the palette. Small palette-training previews keep
+    memory bounded without reducing the resolution of the encoded frames.
+    """
+    thumb_size = (480, 270)
+    sample = Image.new("RGB", (thumb_size[0], thumb_size[1] * len(frames)))
+    for k, frame in enumerate(frames):
+        sample.paste(frame.resize(thumb_size, Image.Resampling.LANCZOS),
+                     (0, k * thumb_size[1]))
     palette = sample.quantize(colors=colors, method=Image.Quantize.MEDIANCUT)
-    # no dithering: dithered noise defeats GIF compression
-    quantised = [fr.quantize(palette=palette, dither=Image.Dither.NONE) for fr in frames]
+    # Preserve the exact white page background after adaptive quantisation.
+    entries = palette.getpalette()
+    whitest = max(range(colors), key=lambda i: sum(entries[3 * i:3 * i + 3]))
+    entries[3 * whitest:3 * whitest + 3] = [255, 255, 255]
+    palette.putpalette(entries)
+    # Dithering preserves subtle surface gradients within GIF's colour limit.
+    quantised = [frame.quantize(palette=palette, dither=Image.Dither.FLOYDSTEINBERG)
+                 for frame in frames]
     quantised[0].save(path, save_all=True, append_images=quantised[1:], duration=durations,
-                      loop=0, optimize=True, disposal=1)
+                      loop=0, optimize=False, disposal=1)
+    path = Path(path)
+    frames[-1].save(path.with_name(path.stem + "_still.png"), optimize=True)
 
 
 def style_axes(ax):

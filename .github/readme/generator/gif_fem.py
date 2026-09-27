@@ -5,12 +5,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection, Line3DCollection
 
-from style import (PAPER, BLUE, INK, SECONDARY, MUTED, LABEL,
+from style import (ANIMATION_FIGSIZE, ANIMATION_DPI, PAPER, BLUE, INK, SECONDARY, MUTED, LABEL,
                    SOLUTION_CMAP, use_course_fonts, fig_to_image, save_gif, style_axes)
 from fem_lshape import first_eigenpair, LAMBDA_1
 
 LEVELS = (3, 4, 6, 8, 12, 16, 24, 32)
-SIZE = (800, 450)
 Z_SCALE = 0.95
 LIGHT = np.array([-0.45, -0.55, 0.85]) / np.linalg.norm([-0.45, -0.55, 0.85])
 L_OUTLINE = np.array([(-1, -1), (0, -1), (0, 0), (1, 0), (1, 1), (-1, 1), (-1, -1)], float)
@@ -28,7 +27,7 @@ def surface_polys(pts, tris, u):
 
 def draw_frame(sol, k, azim, history):
     pts, tris, u, lam, dofs, n = sol
-    fig = plt.figure(figsize=(8, 4.5), dpi=200, facecolor=PAPER)
+    fig = plt.figure(figsize=ANIMATION_FIGSIZE, dpi=ANIMATION_DPI, facecolor=PAPER)
 
     # 3D surface
     ax = fig.add_axes([-0.04, -0.06, 0.72, 0.98], projection="3d", facecolor=PAPER)
@@ -70,7 +69,7 @@ def draw_frame(sol, k, azim, history):
     fig.text(0.70, 0.735, r"Eigenvalue error $\lambda_{1,h}-\lambda_1$", color=INK, fontsize=10.5,
              fontweight="bold")
     fig.text(0.70, 0.695, r"$\lambda_1 \approx 9.6397$", color=MUTED, fontsize=9)
-    img = fig_to_image(fig, SIZE)
+    img = fig_to_image(fig)
     plt.close(fig)
     return img
 

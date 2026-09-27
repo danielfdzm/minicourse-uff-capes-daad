@@ -6,11 +6,10 @@ import torch
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-from style import (PAPER, BLUE, RUST, INK, SECONDARY, MUTED, LABEL,
+from style import (ANIMATION_FIGSIZE, ANIMATION_DPI, PAPER, BLUE, RUST, INK, SECONDARY, MUTED, LABEL,
                    use_course_fonts, fig_to_image, save_gif, style_axes)
 
 SEED, SIGMA, N_TRAIN, N_VAL, WIDTH, LR, STEPS = 3, 0.15, 40, 20, 48, 5e-3, 6000
-SIZE = (800, 450)
 
 
 def target(x):
@@ -51,7 +50,7 @@ def train():
 def draw_frame(data, snap):
     step, pred, upto = snap
     hist = data["history"][:upto]
-    fig = plt.figure(figsize=(8, 4.5), dpi=200, facecolor=PAPER)
+    fig = plt.figure(figsize=ANIMATION_FIGSIZE, dpi=ANIMATION_DPI, facecolor=PAPER)
     fig.text(0.045, 0.905, "CHAPTER 2  ·  MACHINE LEARNING", color=LABEL, fontsize=10, fontweight="bold")
     fig.text(0.045, 0.835, "Neural network regression on noisy samples",
              color=INK, fontsize=16, fontweight="normal")
@@ -103,7 +102,7 @@ def draw_frame(data, snap):
     lx.set_xlabel("training step", color=MUTED, fontsize=9, labelpad=2)
     fig.text(0.665, 0.715, "Mean-squared error", color=INK, fontsize=10.5, fontweight="bold")
     fig.text(0.045, 0.035, f"step {step:,}", color=INK, fontsize=11)
-    img = fig_to_image(fig, SIZE)
+    img = fig_to_image(fig)
     plt.close(fig)
     return img
 

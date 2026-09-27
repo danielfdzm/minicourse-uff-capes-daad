@@ -7,11 +7,10 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
-from style import (PAPER, BLUE, RUST, INK, SECONDARY, MUTED, GRID, LABEL,
+from style import (ANIMATION_FIGSIZE, ANIMATION_DPI, PAPER, BLUE, RUST, INK, SECONDARY, MUTED, GRID, LABEL,
                    SOLUTION_CMAP, ERROR_CMAP, use_course_fonts, fig_to_image, save_gif, style_axes)
 
 STEPS, LR, N_COLLOCATION, SEED = 3000, 2e-3, 1024, 7
-SIZE = (800, 450)
 LIGHT = np.array([-0.45, -0.55, 0.85]) / np.linalg.norm([-0.45, -0.55, 0.85])
 
 
@@ -70,7 +69,7 @@ def surface_polys(X, Y, Z):
 def draw_frame(data, snap, azim):
     step, pred, upto = snap
     hist = data["history"][:upto]
-    fig = plt.figure(figsize=(8, 4.5), dpi=200, facecolor=PAPER)
+    fig = plt.figure(figsize=ANIMATION_FIGSIZE, dpi=ANIMATION_DPI, facecolor=PAPER)
     fig.text(0.045, 0.905, "CHAPTER 3  ·  NEURAL NETWORKS FOR PDEs", color=LABEL, fontsize=10, fontweight="bold")
     fig.text(0.045, 0.835, r"Physics-informed solution of $-\Delta u = f$", color=INK,
              fontsize=16, fontweight="normal")
@@ -122,7 +121,7 @@ def draw_frame(data, snap, azim):
     fig.text(0.47, 0.105, f"step {step:,}", color=INK, fontsize=11)
     fig.text(0.47, 0.055, rf"relative $L^2$ error {rel[-1]:.1e}".replace("e-0", "e-"), color=SECONDARY,
              fontsize=10)
-    img = fig_to_image(fig, SIZE)
+    img = fig_to_image(fig)
     plt.close(fig)
     return img
 

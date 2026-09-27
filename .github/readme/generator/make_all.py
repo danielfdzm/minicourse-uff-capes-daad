@@ -10,7 +10,8 @@ from the TeX installation when one is available.
 The animations rerun three computations: P1 finite elements for the L-shaped
 eigenproblem (fem), a small tanh network fitted to noisy samples (ml) and a
 physics-informed network for a 2D Poisson problem (pinn). The highlight strips
-reuse figures from the chapter folders.
+reuse figures from the chapter folders. Animations are rendered at native UHD
+(3840 × 2160) with 256 colours; each also exports a lossless *_still.png final frame.
 """
 import sys
 from pathlib import Path

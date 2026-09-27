@@ -31,7 +31,9 @@ with classical methods and show how observations help recover unknown coefficien
 ## 1. Theoretical and computational foundations of FEM
 
 <p align="center">
-  <img src=".github/readme/fem_eigenmode.gif" alt="Animation: P1 finite element approximation of the first eigenfunction of the L-shaped domain on successively refined meshes, with the eigenvalue error falling" width="100%">
+  <a href=".github/readme/fem_eigenmode_still.png">
+    <img src=".github/readme/fem_eigenmode.gif" alt="Animation: P1 finite element approximation of the first eigenfunction of the L-shaped domain on successively refined meshes, with the eigenvalue error falling" width="100%">
+  </a>
 </p>
 <p align="center"><sub>P1 finite elements for the first Dirichlet eigenfunction of the L-shaped domain. The eigenvalue error falls with every refinement, at a rate limited by the re-entrant corner.</sub></p>
 
@@ -55,7 +57,9 @@ has a script in `experiments/`.
 ## 2. Fundamentals of Machine Learning
 
 <p align="center">
-  <img src=".github/readme/ml_training.gif" alt="Animation: a small neural network fits noisy samples; training error keeps falling while validation error turns back up" width="100%">
+  <a href=".github/readme/ml_training_still.png">
+    <img src=".github/readme/ml_training.gif" alt="Animation: a small neural network fits noisy samples; training error keeps falling while validation error turns back up" width="100%">
+  </a>
 </p>
 <p align="center"><sub>A 1–48–48–1 tanh network trained with Adam on 40 noisy samples. Training error keeps falling after validation error starts to rise. Early stopping keeps the checkpoint with the lowest validation error.</sub></p>
 
@@ -72,7 +76,9 @@ testing without leakage.
 ## 3. Neural networks for solving PDEs
 
 <p align="center">
-  <img src=".github/readme/pinn_training.gif" alt="Animation: a physics-informed neural network learns the solution of a 2D Poisson problem; its pointwise error and training curves shrink" width="100%">
+  <a href=".github/readme/pinn_training_still.png">
+    <img src=".github/readme/pinn_training.gif" alt="Animation: a physics-informed neural network learns the solution of a 2D Poisson problem; its pointwise error and training curves shrink" width="100%">
+  </a>
 </p>
 <p align="center"><sub>A PINN for −Δu = 2π² sin(πx) sin(πy) on the unit square, trained only on the PDE residual at 1,024 points, with the boundary condition built into the network. After 3,000 Adam steps the relative L² error is about 7·10⁻⁵.</sub></p>
 
@@ -154,7 +160,9 @@ python -m jupyter lab Neural_PDE_Laboratory.ipynb
 ## About the README graphics
 
 The graphics use a restrained palette and fixed viewpoints, with pauses to read each
-result. The animations show a P1 finite element eigenfunction on an L-shaped domain, a network
-fitting noisy data, and a PINN solving Poisson. To rerun the computations and rebuild
+result. Animations are rendered at 3840 × 2160 with a 256-color palette; click an
+animation to open its lossless, full-resolution final frame. The animations show a
+P1 finite element eigenfunction on an L-shaped domain, a network fitting noisy data,
+and a PINN solving Poisson. To rerun the computations and rebuild
 the graphics, run `python .github/readme/generator/make_all.py` with NumPy, SciPy,
 Matplotlib, Pillow, and PyTorch installed.
