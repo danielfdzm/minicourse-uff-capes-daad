@@ -1,0 +1,40 @@
+{
+  "part": "02_poisson_and_limits",
+  "versions": {
+    "python": "3.13.9",
+    "numpy": "2.4.2",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "torch": "2.10.0",
+    "plotly": "6.9.0"
+  },
+  "run_mode": "quick",
+  "seed": 7,
+  "budgets": {
+    "adam_1d": 900,
+    "lbfgs_1d": 180,
+    "adam_2d": 1100,
+    "lbfgs_2d": 260,
+    "boundary_adam": 900
+  },
+  "device": "cpu",
+  "dtype": "torch.float64",
+  "settings": {
+    "poisson_collocation": 768
+  },
+  "static_figures": [
+    "04_poisson_square",
+    "05_coercivity_counterexamples"
+  ],
+  "interactive_figures": [
+    "04_poisson_explorer"
+  ],
+  "metrics": [
+    {
+      "experiment": "Square Poisson PINN",
+      "relative_l2": 9.707106684738989e-06,
+      "seconds": 10.570992208085954
+    }
+  ],
+  "elapsed_seconds": 16.835892584058456
+}

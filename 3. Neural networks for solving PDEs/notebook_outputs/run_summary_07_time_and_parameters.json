@@ -1,0 +1,69 @@
+{
+  "part": "07_time_and_parameters",
+  "versions": {
+    "python": "3.13.9",
+    "numpy": "2.4.2",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "torch": "2.10.0",
+    "plotly": "6.9.0"
+  },
+  "run_mode": "quick",
+  "seed": 7,
+  "budgets": {
+    "adam_1d": 900,
+    "lbfgs_1d": 180,
+    "adam_2d": 1100,
+    "lbfgs_2d": 260,
+    "boundary_adam": 900
+  },
+  "device": "cpu",
+  "dtype": "torch.float64",
+  "settings": {
+    "heat": {
+      "seed": 121,
+      "diffusivity": 0.08,
+      "points": 768,
+      "width": 32,
+      "depth": 2,
+      "adam_steps": 1200,
+      "lbfgs_steps": 240,
+      "final_time": 1.0,
+      "trial": "u0(x) + t*x*(1-x)*N(x,t)"
+    },
+    "parametric": {
+      "seed": 1313,
+      "mu_max": 30.0,
+      "collocation": 768,
+      "width": 32,
+      "depth": 3,
+      "adam_steps": 1000,
+      "lbfgs_steps": 220,
+      "fd_interior_nodes": 63
+    }
+  },
+  "static_figures": [
+    "12_heat_space_time",
+    "13_parametric_solver"
+  ],
+  "interactive_figures": [
+    "12_heat_profiles_interactive",
+    "13_parametric_interactive"
+  ],
+  "metrics": [
+    {
+      "experiment": "Heat space-time PINN",
+      "relative_l2": 0.0001811771228648491,
+      "residual_rms": 0.0037194415945214993,
+      "seconds": 13.149885207996704
+    },
+    {
+      "experiment": "Parameter-conditioned PINN",
+      "relative_l2": 0.0003577962458694303,
+      "maximum_parameter_error": 0.001240952187082041,
+      "normalized_residual_rms": 0.0006117287775405446,
+      "seconds": 8.185592166963033
+    }
+  ],
+  "elapsed_seconds": 33.2509923329344
+}

@@ -1,0 +1,51 @@
+{
+  "part": "05_reaction_diffusion",
+  "versions": {
+    "python": "3.13.9",
+    "numpy": "2.4.2",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "torch": "2.10.0",
+    "plotly": "6.9.0"
+  },
+  "run_mode": "quick",
+  "seed": 7,
+  "budgets": {
+    "adam_1d": 900,
+    "lbfgs_1d": 180,
+    "adam_2d": 1100,
+    "lbfgs_2d": 260,
+    "boundary_adam": 900
+  },
+  "device": "cpu",
+  "dtype": "torch.float64",
+  "settings": {
+    "seed": 92,
+    "steps": 6500,
+    "dt": 0.9,
+    "grid": 96,
+    "parameters": [
+      [
+        0.035,
+        0.06
+      ],
+      [
+        0.025,
+        0.06
+      ],
+      [
+        0.04,
+        0.062
+      ]
+    ],
+    "time_step_difference": 0.004204718668853924
+  },
+  "static_figures": [
+    "09_reaction_patterns"
+  ],
+  "interactive_figures": [
+    "09_reaction_interactive"
+  ],
+  "metrics": [],
+  "elapsed_seconds": 7.231692333007231
+}

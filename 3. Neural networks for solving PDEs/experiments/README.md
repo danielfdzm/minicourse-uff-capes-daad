@@ -1,7 +1,7 @@
 # Python experiments for the PDE slides
 
 To work through the experiments interactively, open
-[Neural PDE Laboratory](../Neural_PDE_Laboratory.ipynb). It includes the main slide
+[Neural PDE Laboratory](../NOTEBOOK_README.md). Its seven independent notebooks include the main slide
 examples, saved outputs, and further experiments on membranes, sensor placement,
 sampling, curved domains, and time-dependent PDEs. See the
 [notebook guide](../NOTEBOOK_README.md) for the full list and setup instructions.

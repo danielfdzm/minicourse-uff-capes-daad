@@ -1,0 +1,46 @@
+{
+  "part": "04_dimensions_and_geometry",
+  "versions": {
+    "python": "3.13.9",
+    "numpy": "2.4.2",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "torch": "2.10.0",
+    "plotly": "6.9.0"
+  },
+  "run_mode": "quick",
+  "seed": 7,
+  "budgets": {
+    "adam_1d": 900,
+    "lbfgs_1d": 180,
+    "adam_2d": 1100,
+    "lbfgs_2d": 260,
+    "boundary_adam": 900
+  },
+  "device": "cpu",
+  "dtype": "torch.float64",
+  "settings": {
+    "high_dimension_seed": 1701,
+    "annulus_seed": 1702,
+    "annulus_lbfgs": 130,
+    "annulus_points": 512,
+    "high_dim_repeats": 16
+  },
+  "static_figures": [
+    "extra_high_dimension",
+    "extra_annulus_solution",
+    "extra_annulus_diagnostics"
+  ],
+  "interactive_figures": [
+    "extra_annulus_interactive"
+  ],
+  "metrics": [
+    {
+      "experiment": "Annulus PINN",
+      "relative_l2": 0.0002951106384787639,
+      "residual_rms": 0.002443094935936755,
+      "seconds": 0.5115527090383694
+    }
+  ],
+  "elapsed_seconds": 7.392691999906674
+}

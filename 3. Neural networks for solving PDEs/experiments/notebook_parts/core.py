@@ -51,7 +51,7 @@ from torch import nn
 import plotly
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from IPython.display import display, HTML, Image
+from IPython.display import display, Markdown, Image
 
 RUN_MODE = "quick"               # "quick" or "thorough"
 SEED = 7
@@ -141,9 +141,10 @@ def show_interactive(fig, name):
     config = {"displaylogo": False, "responsive": True}
     fig.write_html(OUTPUT_DIR / f"{name}.html", include_plotlyjs=True,
                    full_html=True, config=config, auto_play=False)
-    # Embed the JS with each figure so the output can also be viewed in isolation.
-    display(HTML(fig.to_html(include_plotlyjs=True, full_html=False,
-                             config=config, auto_play=False)))
+    # Keep notebook previews small: JavaScript and animation data live in HTML.
+    relative = (OUTPUT_DIR / f"{name}.html").relative_to(Path.cwd()).as_posix()
+    display(Markdown(f"[Open interactive explorer]({relative}) — "
+                     "open locally in a browser; GitHub previews show the static plots."))
 
 def grad_scalar(u, x):
     return torch.autograd.grad(u.sum(), x, create_graph=True)[0]

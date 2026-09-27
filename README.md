@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <b>Lecture slides, runnable FEniCSx examples and a neural-PDE laboratory notebook</b><br>
+  <b>Lecture slides, runnable FEniCSx examples and neural-PDE laboratory notebooks</b><br>
   <a href="#1-theoretical-and-computational-foundations-of-fem">Finite elements</a> &nbsp;·&nbsp;
   <a href="#2-fundamentals-of-machine-learning">Machine learning</a> &nbsp;·&nbsp;
   <a href="#3-neural-networks-for-solving-pdes">Neural networks for PDEs</a> &nbsp;·&nbsp;
@@ -24,7 +24,7 @@ with classical methods and show how observations help recover unknown coefficien
 | **1.1** | [Theoretical foundations of FEM](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.1.%20Theoretical%20foundations) | [Finite element methods: foundations](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.1.%20Theoretical%20foundations/1.1_fem_foundations.pdf) · 69 slides | |
 | **1.2** | [Computational practice with FEniCS](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.2.%20Computational%20practice%20with%20FEniCS) | [Part I](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.2.%20Computational%20practice%20with%20FEniCS/1.2_fenics_part1.pdf) · 38 slides<br>[Part II](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.2.%20Computational%20practice%20with%20FEniCS/1.2_fenics_part2.pdf) · 35 slides | 14 Python examples |
 | **2** | [Fundamentals of Machine Learning](2.%20Fundamentals%20of%20Machine%20Learning) | [Neural networks for supervised regression](2.%20Fundamentals%20of%20Machine%20Learning/2_machine_learning_fundamentals.pdf) · 80 slides | |
-| **3** | [Neural networks for solving PDEs](3.%20Neural%20networks%20for%20solving%20PDEs) | [From data-driven regression to PINNs, Deep Ritz and hybrid losses](3.%20Neural%20networks%20for%20solving%20PDEs/3_neural_networks_for_pdes.pdf) · 83 slides | slide experiments, [lab notebook](3.%20Neural%20networks%20for%20solving%20PDEs/Neural_PDE_Laboratory.ipynb) |
+| **3** | [Neural networks for solving PDEs](3.%20Neural%20networks%20for%20solving%20PDEs) | [From data-driven regression to PINNs, Deep Ritz and hybrid losses](3.%20Neural%20networks%20for%20solving%20PDEs/3_neural_networks_for_pdes.pdf) · 83 slides | slide experiments, [lab notebooks](3.%20Neural%20networks%20for%20solving%20PDEs/NOTEBOOK_README.md) |
 
 ---
 
@@ -88,11 +88,12 @@ limits), network design and exact boundary conditions, Deep Ritz and weak formul
 hybrid PDE–data losses and inverse problems. We also examine the training difficulties
 and compare with classical solvers. The scripts in `experiments/` reproduce the slide results.
 
-**[Neural PDE Laboratory](3.%20Neural%20networks%20for%20solving%20PDEs/Neural_PDE_Laboratory.ipynb)**
+**[Neural PDE Laboratory](3.%20Neural%20networks%20for%20solving%20PDEs/NOTEBOOK_README.md)**
 &nbsp;·&nbsp; Run 13 experiments, inspect the errors, and try changing the setup. Topics include
 a vibrating membrane, sensor placement, Gray–Scott patterns, Fourier features, adaptive
-sampling, heat flow, and a network trained for several PDE parameters. The notebook
-includes saved outputs. To browse the figures and seven interactive plots, download
+sampling, heat flow, and a network trained for several PDE parameters. Seven independent
+notebooks include saved static plots for convenient GitHub previews. To browse the
+figures and seven interactive plots, download
 `notebook_outputs/` and open `index.html` in a browser.
 
 <p align="center">
@@ -122,8 +123,9 @@ includes saved outputs. To browse the figures and seven interactive plots, downl
 └── 3. Neural networks for solving PDEs/
     ├── 3_neural_networks_for_pdes.tex / .pdf
     ├── experiments/                              scripts, results and figures behind the slides
-    ├── Neural_PDE_Laboratory.ipynb               executed lab notebook
-    ├── Neural_PDE_Laboratory_bundle.zip          notebook and outputs in one download
+    ├── Neural_PDE_Laboratory.ipynb               laboratory index
+    ├── Neural_PDE_01_*.ipynb … Neural_PDE_07_*.ipynb  seven executed lab notebooks
+    ├── Neural_PDE_Laboratory_bundle.zip          all notebooks and outputs in one download
     └── notebook_outputs/                         figures and interactive HTML explorers
 ```
 
@@ -154,7 +156,7 @@ directory. On a machine without a display, set `PYVISTA_OFF_SCREEN=true` first.
 ```sh
 cd "3. Neural networks for solving PDEs"
 python -m pip install -r experiments/requirements-notebook.txt
-python -m jupyter lab Neural_PDE_Laboratory.ipynb
+python -m jupyter lab Neural_PDE_01_foundations.ipynb
 ```
 
 ## About the README graphics

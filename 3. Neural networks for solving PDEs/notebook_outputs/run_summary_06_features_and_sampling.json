@@ -1,0 +1,118 @@
+{
+  "part": "06_features_and_sampling",
+  "versions": {
+    "python": "3.13.9",
+    "numpy": "2.4.2",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "torch": "2.10.0",
+    "plotly": "6.9.0"
+  },
+  "run_mode": "quick",
+  "seed": 7,
+  "budgets": {
+    "adam_1d": 900,
+    "lbfgs_1d": 180,
+    "adam_2d": 1100,
+    "lbfgs_2d": 260,
+    "boundary_adam": 900
+  },
+  "device": "cpu",
+  "dtype": "torch.float64",
+  "settings": {
+    "multiscale": {
+      "seed": 314,
+      "k": 8,
+      "amplitude": 0.15,
+      "feature_frequencies": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "points": 128,
+      "sampling": "fixed interior midpoints",
+      "width": 24,
+      "hidden_layers": 2,
+      "adam_steps": 450,
+      "adam_learning_rate": 0.002,
+      "lbfgs_max_iter": 100,
+      "residual_normalization": 67.35959813095556,
+      "exact_boundary_factor": "x*(1-x)",
+      "device": "cpu",
+      "dtype": "float64",
+      "threads": 1,
+      "parameter_counts": {
+        "Plain tanh": 673,
+        "Fourier features": 817
+      }
+    },
+    "adaptive": {
+      "seed": 71,
+      "points_per_step": 40,
+      "candidate_count": 1000,
+      "hidden_features": 64,
+      "stages": 24,
+      "steps_per_stage": 100,
+      "learning_rate": 0.015,
+      "stage_lr_decay": 0.75,
+      "uniform_mixture": 0.35,
+      "center": 0.63,
+      "width": 0.025,
+      "residual_scale": 1000.0
+    }
+  },
+  "static_figures": [
+    "10_multiscale_comparison",
+    "11_adaptive_accuracy",
+    "11_adaptive_sampling_maps"
+  ],
+  "interactive_figures": [
+    "10_multiscale_learning"
+  ],
+  "metrics": [
+    {
+      "experiment": "Multiscale: Plain tanh",
+      "relative_l2": 0.1681031967128126,
+      "residual_rms": 7.101513395294625,
+      "parameters": 673,
+      "seconds": 1.5385929580079392,
+      "objective_evaluations": 565,
+      "boundary_max_abs": 0.0,
+      "mode_1": 1.1511689208431937,
+      "mode_8": 0.14886944555747683
+    },
+    {
+      "experiment": "Multiscale: Fourier features",
+      "relative_l2": 0.0035440157394061914,
+      "residual_rms": 0.1838708002926655,
+      "parameters": 817,
+      "seconds": 3.035079500055872,
+      "objective_evaluations": 555,
+      "boundary_max_abs": 0.0,
+      "mode_1": 1.003557386105789,
+      "mode_8": 0.15000214108200646
+    },
+    {
+      "experiment": "Adaptive sampling / Fixed uniform",
+      "relative_l2": 0.270793552488712,
+      "seconds": 0.4949537080246955,
+      "residual_rms": 333.5117074360569,
+      "extra_candidate_evaluations": 0
+    },
+    {
+      "experiment": "Adaptive sampling / Uniform refresh",
+      "relative_l2": 0.17217508670156356,
+      "seconds": 0.9458852499956265,
+      "residual_rms": 5.255178226421055,
+      "extra_candidate_evaluations": 0
+    },
+    {
+      "experiment": "Adaptive sampling / Residual adaptive",
+      "relative_l2": 0.07098392004907673,
+      "seconds": 0.4628951660124585,
+      "residual_rms": 5.087934505874919,
+      "extra_candidate_evaluations": 23000
+    }
+  ],
+  "elapsed_seconds": 19.656445208005607
+}

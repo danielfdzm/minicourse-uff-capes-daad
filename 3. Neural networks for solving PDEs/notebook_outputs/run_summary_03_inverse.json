@@ -1,0 +1,49 @@
+{
+  "part": "03_inverse",
+  "versions": {
+    "python": "3.13.9",
+    "numpy": "2.4.2",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "torch": "2.10.0",
+    "plotly": "6.9.0"
+  },
+  "run_mode": "quick",
+  "seed": 7,
+  "budgets": {
+    "adam_1d": 900,
+    "lbfgs_1d": 180,
+    "adam_2d": 1100,
+    "lbfgs_2d": 260,
+    "boundary_adam": 900
+  },
+  "device": "cpu",
+  "dtype": "torch.float64",
+  "settings": {
+    "seed": 23,
+    "adam": 1000,
+    "lbfgs": 140,
+    "sensors": 10,
+    "noise_sd": 0.028571428571428574
+  },
+  "static_figures": [
+    "inverse_sensor_design",
+    "inverse_solution_family_and_valley"
+  ],
+  "interactive_figures": [],
+  "metrics": [
+    {
+      "experiment": "Inverse: Interior sensors",
+      "relative_l2": 0.0067428002603553295,
+      "kappa": 0.7028632318787517,
+      "kappa_exact_model": 0.7033670939624387
+    },
+    {
+      "experiment": "Inverse: Boundary clusters",
+      "relative_l2": 0.046593493906939724,
+      "kappa": 0.7341988017104029,
+      "kappa_exact_model": 0.7341091401028318
+    }
+  ],
+  "elapsed_seconds": 7.548915124963969
+}

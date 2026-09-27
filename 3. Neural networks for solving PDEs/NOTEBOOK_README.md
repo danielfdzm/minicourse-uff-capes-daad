@@ -1,50 +1,82 @@
 # Neural PDE Laboratory
 
-Open [Neural_PDE_Laboratory.ipynb](Neural_PDE_Laboratory.ipynb) to work through the experiments. It includes saved outputs and runs on its own once the dependencies are installed. To browse the figures, download `notebook_outputs/` and open [index.html](notebook_outputs/index.html) in a browser.
+The 13 experiments are split into **seven self-contained notebooks**. Each includes
+its own imports, plotting helpers, and saved static plots; you can run any notebook
+in a fresh kernel without first running another one.
 
-The thirteen experiments include explanations and suggestions for what to try next:
+| Notebook | Experiments |
+|---|---|
+| [01 · Membranes, PINNs, Deep Ritz and boundary conditions](Neural_PDE_01_foundations.ipynb) | 1–3 |
+| [02 · Poisson surfaces and limits of continuous losses](Neural_PDE_02_poisson_and_limits.ipynb) | 4–5 |
+| [03 · Inverse diffusion and sensor placement](Neural_PDE_03_inverse.ipynb) | 6 |
+| [04 · High dimensions and the annulus](Neural_PDE_04_dimensions_and_geometry.ipynb) | 7–8 |
+| [05 · Reaction–diffusion patterns](Neural_PDE_05_reaction_diffusion.ipynb) | 9 |
+| [06 · Fourier features and adaptive collocation](Neural_PDE_06_features_and_sampling.ipynb) | 10–11 |
+| [07 · Heat flow and parameter-conditioned PINNs](Neural_PDE_07_time_and_parameters.ipynb) | 12–13 |
 
-1. A vibrating 2D membrane: modal interference, conserved energy, and an animated 3D surface.
-2. A 1D Poisson problem: strong PINN versus Deep Ritz, with a finite-difference reference.
-3. Hard versus soft boundary conditions and a penalty-weight sweep.
-4. A 2D Poisson PINN, with independent error/residual maps and a 3D explorer.
-5. Tanh nonattainment and a continuous-residual counterexample.
-6. Inverse diffusion: sparse sensor placement, coefficient recovery, uncertainty, and an identifiability valley.
-7. High-dimensional Monte Carlo energy integration, checked against an exact RMS formula.
-8. A neural Poisson solution on an annulus, with area-uniform sampling and exact boundary enforcement.
-9. Gray–Scott reaction–diffusion patterns, with a classical solver, time-step diagnostic, and animated 3D concentration landscape.
-10. Multiscale Poisson: plain tanh versus Fourier-feature inputs, with modal recovery during training.
-11. Residual-adaptive collocation: importance weighting, localization, and a comparison at a fixed point/iteration budget.
-12. A space–time heat PINN: initial and boundary enforcement, diffusion of Fourier modes, and animated profiles.
-13. A parameter-conditioned PINN: one trained network for a reaction–diffusion family, compared with a finite-difference reference.
+[Neural_PDE_Laboratory.ipynb](Neural_PDE_Laboratory.ipynb) is now a small navigation
+notebook, so existing links still work. The individual notebooks omit embedded
+JavaScript and animation data. Their saved figures and diagnostics can be browsed
+on GitHub; interactive explorers remain available as standalone offline HTML files.
+Download `notebook_outputs/` and open [index.html](notebook_outputs/index.html) in a browser.
 
-## Run it
+## Run a notebook
 
 Use Python 3.11 or newer. From this folder (`3. Neural networks for solving PDEs/`):
 
 ```sh
 python -m pip install -r experiments/requirements-notebook.txt
-python -m jupyter lab Neural_PDE_Laboratory.ipynb
+python -m jupyter lab Neural_PDE_01_foundations.ipynb
 ```
 
-Select **Restart Kernel and Run All Cells**. The initial cells contain the imports, shared plotting helpers, seed, and training budgets. The supplied notebook already has outputs. Trust it in Jupyter to enable embedded JavaScript; standalone HTML explorers also work offline in a browser.
+Choose another filename from the table to start with a different topic. Select
+**Restart Kernel and Run All Cells**. Each notebook computes its own data and can be
+copied and run independently of the slide sources, experiment scripts, and other
+notebooks once the dependencies are installed.
 
-The supplied run took about 104 seconds on the machine used to prepare it, including figure exports. It uses CPU/float64 and short training runs. The measured total runtime is recorded in `notebook_outputs/run_summary.json` and printed in the final cell. Runtime varies by machine. `RUN_MODE = "thorough"` increases budgets in the chapters that provide this option; each experiment lists its optimizer and sampling settings. All experiments compute their own inputs and results, so the notebook can be copied and run independently of the slide source and experiment scripts.
+The initial cells contain the seed and training budgets. Computations use CPU/float64
+and short training runs; `RUN_MODE = "thorough"` increases budgets where supported.
+Runtime and numerical diagnostics are recorded separately for each notebook.
 
 ## Outputs
 
-Running the notebook writes to `notebook_outputs/` in the kernel's working directory:
+All notebooks write to `notebook_outputs/` in the kernel's working directory:
 
-- 16 static figure sets, each as PNG and vector PDF.
-- Seven self-contained interactive HTML explorers for membrane motion, Poisson fields, the annulus, reaction–diffusion, modal learning, heat flow, and the parameterized PDE family.
-- `index.html`, a visual gallery linking these outputs.
-- `run_summary.json`, with versions, seeds, budgets, and measured errors.
-- `computed_fields.npz`, with numerical fields and diagnostics.
+- Static figure sets as PNG and vector PDF, with saved PNG previews in the notebooks.
+- Seven self-contained interactive HTML explorers across the collection: membrane
+  motion, Poisson fields, the annulus, reaction–diffusion, modal learning, heat flow,
+  and the parameterized PDE family.
+- `index_<part>.html`, a gallery for the notebook that was run.
+- `run_summary_<part>.json`, with versions, seeds, settings and measured errors.
+- `computed_fields_<part>.npz`, with that notebook's numerical fields and diagnostics.
 
-Read the axis labels on the 3D plots: height represents a field value, and some plots use time or a PDE parameter as an axis. Each experiment explains whether it uses an analytic solution, a neural network, a classical solver, or a sampling calculation. Forward neural solves use the forcing and boundary conditions for training and the exact solution for error checks.
+For example, notebook 01 writes `run_summary_01_foundations.json`. Unique report
+names let you run the notebooks in any order. The supplied `index.html` links the
+whole collection; the original `run_summary.json` and `computed_fields.npz` retain
+the baseline results from the earlier combined notebook.
 
-To edit the notebook, change the source cells in `experiments/notebook_parts/`, then rebuild and run it in a fresh kernel:
+GitHub shows the saved static plots. For rotation, sliders and animations, open the
+exported HTML files locally in a browser. They contain their own JavaScript and work
+offline. Read the axes: height can represent a field value, and some plots use time
+or a PDE parameter as an axis. Exact solutions check errors after forward training.
+
+## Rebuild the collection
+
+Edit source cells in `experiments/notebook_parts/`. The builder inserts the shared
+setup into each notebook, assigns experiments to parts, and generates the index.
+To rebuild and execute all seven in separate fresh kernels, then refresh the download:
 
 ```sh
-python experiments/build_notebook.py --execute
+python experiments/build_notebook.py --execute --bundle
 ```
+
+To rebuild and execute just one part:
+
+```sh
+python experiments/build_notebook.py --part 03_inverse --execute --bundle
+```
+
+Omitting `--execute` writes unexecuted notebooks. The builder enforces a 5 MB size
+budget per notebook to keep previews manageable; interactive data stays in HTML.
+`Neural_PDE_Laboratory_bundle.zip` includes all seven notebooks, the navigation
+notebook, this guide, requirements, rebuild sources, and all exported results.

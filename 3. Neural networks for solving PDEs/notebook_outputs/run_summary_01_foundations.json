@@ -1,0 +1,46 @@
+{
+  "part": "01_foundations",
+  "versions": {
+    "python": "3.13.9",
+    "numpy": "2.4.2",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "torch": "2.10.0",
+    "plotly": "6.9.0"
+  },
+  "run_mode": "quick",
+  "seed": 7,
+  "budgets": {
+    "adam_1d": 900,
+    "lbfgs_1d": 180,
+    "adam_2d": 1100,
+    "lbfgs_2d": 260,
+    "boundary_adam": 900
+  },
+  "device": "cpu",
+  "dtype": "torch.float64",
+  "settings": {
+    "wave_relative_energy_drift": 3.113212152029327e-16
+  },
+  "static_figures": [
+    "01_membrane",
+    "02_pinn_vs_ritz",
+    "03_boundary_balance"
+  ],
+  "interactive_figures": [
+    "01_membrane_interactive"
+  ],
+  "metrics": [
+    {
+      "experiment": "Hard PINN",
+      "relative_l2": 3.72494367702728e-06,
+      "seconds": 1.6781612919876352
+    },
+    {
+      "experiment": "Deep Ritz",
+      "relative_l2": 1.8118949285961692e-05,
+      "seconds": 1.0088374170009047
+    }
+  ],
+  "elapsed_seconds": 17.933232208015397
+}
