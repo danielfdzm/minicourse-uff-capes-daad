@@ -64,19 +64,17 @@ or a PDE parameter as an axis. Exact solutions check errors after forward traini
 
 Edit source cells in `experiments/notebook_parts/`. The builder inserts the shared
 setup into each notebook, assigns experiments to parts, and generates the index.
-To rebuild and execute all seven in separate fresh kernels, then refresh the download:
+To rebuild and execute all seven in separate fresh kernels:
 
 ```sh
-python experiments/build_notebook.py --execute --bundle
+python experiments/build_notebook.py --execute
 ```
 
 To rebuild and execute just one part:
 
 ```sh
-python experiments/build_notebook.py --part 03_inverse --execute --bundle
+python experiments/build_notebook.py --part 03_inverse --execute
 ```
 
 Omitting `--execute` writes unexecuted notebooks. The builder enforces a 5 MB size
 budget per notebook to keep previews manageable; interactive data stays in HTML.
-`Neural_PDE_Laboratory_bundle.zip` includes all seven notebooks, the navigation
-notebook, this guide, requirements, rebuild sources, and all exported results.

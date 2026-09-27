@@ -125,7 +125,6 @@ figures and seven interactive plots, download
     ├── experiments/                              scripts, results and figures behind the slides
     ├── Neural_PDE_Laboratory.ipynb               laboratory index
     ├── Neural_PDE_01_*.ipynb … Neural_PDE_07_*.ipynb  seven executed lab notebooks
-    ├── Neural_PDE_Laboratory_bundle.zip          all notebooks and outputs in one download
     └── notebook_outputs/                         figures and interactive HTML explorers
 ```
 

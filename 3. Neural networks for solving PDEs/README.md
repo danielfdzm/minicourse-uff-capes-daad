@@ -22,7 +22,6 @@ The chapter covers PINNs, Deep Ritz, weak formulations, and inverse problems:
 | [`experiments/`](experiments) | the scripts, saved results and figures behind the numbers on the slides; see [`experiments/README.md`](experiments/README.md) for configurations, measured results and how to reproduce them |
 | [`Neural_PDE_Laboratory.ipynb`](Neural_PDE_Laboratory.ipynb) | index of seven independent notebooks covering 13 experiments, with saved plots; see [`NOTEBOOK_README.md`](NOTEBOOK_README.md) |
 | [`notebook_outputs/`](notebook_outputs) | the laboratory's figures (PNG and PDF) and seven interactive HTML explorers; open `index.html` in a browser |
-| `Neural_PDE_Laboratory_bundle.zip` | all seven notebooks, the index, sources and outputs in one download |
 
 ## Laboratory notebooks
 

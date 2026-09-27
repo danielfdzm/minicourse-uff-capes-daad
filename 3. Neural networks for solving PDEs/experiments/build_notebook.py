@@ -1,6 +1,6 @@
 """Build seven standalone lab notebooks and a small navigation notebook.
 
-python experiments/build_notebook.py --execute --bundle
+python experiments/build_notebook.py --execute
 python experiments/build_notebook.py --part 03_inverse --execute
 
 Each notebook includes its own setup and helpers. Interactive HTML is exported
@@ -12,7 +12,6 @@ import copy
 import importlib.util
 import json
 from pathlib import Path
-import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 PARTS = [
@@ -127,23 +126,9 @@ def write_notebook(notebook, target):
     print(f'Wrote {target.name}: {len(notebook["cells"])} cells, {target.stat().st_size/1e6:.2f} MB.', flush=True)
 
 
-def bundle():
-    paths = [ROOT / 'Neural_PDE_Laboratory.ipynb', ROOT / 'NOTEBOOK_README.md',
-             ROOT / 'experiments' / 'requirements-notebook.txt', Path(__file__).resolve()]
-    paths += [ROOT / filename(slug) for slug, _, _ in PARTS]
-    paths += sorted((ROOT / 'experiments' / 'notebook_parts').glob('*.py'))
-    paths += sorted(p for p in (ROOT / 'notebook_outputs').iterdir() if p.is_file())
-    target = ROOT / 'Neural_PDE_Laboratory_bundle.zip'
-    with zipfile.ZipFile(target, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
-        for path in paths:
-            archive.write(path, path.relative_to(ROOT))
-    print(f'Bundled {len(paths)} files: {target.stat().st_size/1e6:.1f} MB.', flush=True)
-
-
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute', action='store_true')
-    parser.add_argument('--bundle', action='store_true')
     parser.add_argument('--part', choices=[part[0] for part in PARTS])
     parser.add_argument('--workdir', type=Path, default=ROOT,
                         help='Kernel working directory; useful for isolated validation runs.')
@@ -172,8 +157,6 @@ def main():
     index += 'Download `notebook_outputs/` and open `index.html` to browse the offline interactive explorers.'
     write_notebook(make_notebook([md(index)], 'Neural PDE Laboratory — index'),
                    ROOT / 'Neural_PDE_Laboratory.ipynb')
-    if args.bundle:
-        bundle()
 
 
 if __name__ == '__main__':
