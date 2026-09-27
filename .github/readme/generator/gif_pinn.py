@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
-from style import (ANIMATION_FIGSIZE, ANIMATION_DPI, PAPER, BLUE, RUST, INK, SECONDARY, MUTED, GRID, LABEL,
-                   SOLUTION_CMAP, ERROR_CMAP, use_course_fonts, fig_to_image, save_gif, style_axes)
+from style import (ANIMATION_FIGSIZE, ANIMATION_DPI, PAPER, PLOT_BLUE, PLOT_ORANGE, INK, SECONDARY, MUTED, GRID, LABEL,
+                   ANIMATION_SOLUTION_CMAP, ANIMATION_ERROR_CMAP, use_course_fonts, fig_to_image, save_gif, style_axes)
 
 STEPS, LR, N_COLLOCATION, SEED = 3000, 2e-3, 1024, 7
 LIGHT = np.array([-0.45, -0.55, 0.85]) / np.linalg.norm([-0.45, -0.55, 0.85])
@@ -62,7 +62,7 @@ def surface_polys(X, Y, Z):
     n /= np.linalg.norm(n, axis=1, keepdims=True) + 1e-15
     n[n[:, 2] < 0] *= -1
     shade = 0.85 + 0.15 * np.clip(n @ LIGHT, 0, 1)
-    colours = SOLUTION_CMAP(np.clip(tris[:, :, 2].mean(1), 0, 1))[:, :3] * shade[:, None]
+    colours = ANIMATION_SOLUTION_CMAP(np.clip(tris[:, :, 2].mean(1), 0, 1))[:, :3] * shade[:, None]
     return tris, np.clip(colours, 0, 1)
 
 
@@ -86,10 +86,10 @@ def draw_frame(data, snap, azim):
     ax.view_init(elev=27, azim=azim)
     fig.text(0.045, 0.705, r"network solution $u_\theta(x,y)$", color=SECONDARY, fontsize=10)
 
-    # B: pointwise error (magnitude, log scale, one-hue ramp)
+    # B: pointwise error (magnitude, log scale, perceptually ordered colour ramp)
     ex = fig.add_axes([0.47, 0.25, 0.19, 0.32])
     err = np.abs(pred - data["exact"]) + 1e-12
-    im = ex.imshow(err, origin="lower", extent=(0, 1, 0, 1), cmap=ERROR_CMAP,
+    im = ex.imshow(err, origin="lower", extent=(0, 1, 0, 1), cmap=ANIMATION_ERROR_CMAP,
                    norm=LogNorm(1e-5, 1.0), interpolation="bilinear")
     ex.set_xticks([]); ex.set_yticks([])
     for sp in ex.spines.values():
@@ -106,14 +106,14 @@ def draw_frame(data, snap, azim):
     cx.set_xlim(1, STEPS * 1.3); cx.set_ylim(3e-5, 2.0)
     cx.set_xticks([1, 10, 100, 1000])
     s, res, rel = hist[:, 0], hist[:, 1], hist[:, 2]
-    cx.plot(s, res, color=BLUE, linewidth=2, zorder=3)
-    cx.plot(s, rel, color=RUST, linestyle="--", linewidth=2, zorder=3)
-    for series, colour in ((res, BLUE), (rel, RUST)):
+    cx.plot(s, res, color=PLOT_BLUE, linewidth=2, zorder=3)
+    cx.plot(s, rel, color=PLOT_ORANGE, linestyle="--", linewidth=2, zorder=3)
+    for series, colour in ((res, PLOT_BLUE), (rel, PLOT_ORANGE)):
         cx.scatter(s[-1:], series[-1:], s=40, color=colour, edgecolors=PAPER, linewidths=1.6, zorder=4)
     cx.set_xlabel("training step", color=MUTED, fontsize=9, labelpad=2)
     fig.text(0.795, 0.605, "Training", color=INK, fontsize=10.5, fontweight="bold")
     # legend (two series), set as text tokens beside colour keys
-    for i, (label, colour) in enumerate((("PDE residual (loss)", BLUE), (r"relative $L^2$ error", RUST))):
+    for i, (label, colour) in enumerate((("PDE residual (loss)", PLOT_BLUE), (r"relative $L^2$ error", PLOT_ORANGE))):
         y = 0.105 - 0.05 * i
         fig.add_artist(plt.Line2D([0.795, 0.82], [y + 0.012, y + 0.012], color=colour, linewidth=2.2, linestyle="--" if i else "-",
                                   transform=fig.transFigure))
@@ -121,7 +121,7 @@ def draw_frame(data, snap, azim):
     fig.text(0.47, 0.105, f"step {step:,}", color=INK, fontsize=11)
     fig.text(0.47, 0.055, rf"relative $L^2$ error {rel[-1]:.1e}".replace("e-0", "e-"), color=SECONDARY,
              fontsize=10)
-    img = fig_to_image(fig)
+    img = fig_to_image(fig, transparent=True)
     plt.close(fig)
     return img
 

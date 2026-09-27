@@ -6,7 +6,7 @@ import torch
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-from style import (ANIMATION_FIGSIZE, ANIMATION_DPI, PAPER, BLUE, RUST, INK, SECONDARY, MUTED, LABEL,
+from style import (ANIMATION_FIGSIZE, ANIMATION_DPI, PAPER, PLOT_BLUE, PLOT_ORANGE, PLOT_PURPLE, INK, SECONDARY, MUTED, LABEL,
                    use_course_fonts, fig_to_image, save_gif, style_axes)
 
 SEED, SIGMA, N_TRAIN, N_VAL, WIDTH, LR, STEPS = 3, 0.15, 40, 20, 48, 5e-3, 6000
@@ -61,15 +61,15 @@ def draw_frame(data, snap):
     ax = fig.add_axes([0.075, 0.13, 0.50, 0.55])
     style_axes(ax)
     ax.plot(data["grid"], target(data["grid"]), color=MUTED, linewidth=1.4, linestyle="--", zorder=1)
-    ax.scatter(data["xt"], data["yt"], s=30, color=BLUE, edgecolors=PAPER, linewidths=1.4, zorder=3)
-    ax.scatter(data["xv"], data["yv"], s=30, marker="s", color=RUST, edgecolors=PAPER, linewidths=1.4, zorder=3)
-    ax.plot(data["grid"], pred, color=INK, linewidth=2.2, solid_capstyle="round", zorder=4)
+    ax.scatter(data["xt"], data["yt"], s=30, color=PLOT_BLUE, edgecolors=PAPER, linewidths=1.4, zorder=3)
+    ax.scatter(data["xv"], data["yv"], s=30, marker="s", color=PLOT_ORANGE, edgecolors=PAPER, linewidths=1.4, zorder=3)
+    ax.plot(data["grid"], pred, color=PLOT_PURPLE, linewidth=2.2, solid_capstyle="round", zorder=4)
     ax.set_xlim(0, 1); ax.set_ylim(-1.55, 1.55)
     ax.set_xlabel("x", color=MUTED, fontsize=9, labelpad=2)
-    handles = [Line2D([], [], color=INK, lw=2.2, label="network"),
+    handles = [Line2D([], [], color=PLOT_PURPLE, lw=2.2, label="network"),
                Line2D([], [], color=MUTED, lw=1.4, ls="--", label="hidden function"),
-               Line2D([], [], color=BLUE, marker="o", lw=0, ms=6, mec=PAPER, label="training data"),
-               Line2D([], [], color=RUST, marker="s", lw=0, ms=6, mec=PAPER, label="validation data")]
+               Line2D([], [], color=PLOT_BLUE, marker="o", lw=0, ms=6, mec=PAPER, label="training data"),
+               Line2D([], [], color=PLOT_ORANGE, marker="s", lw=0, ms=6, mec=PAPER, label="validation data")]
     leg = ax.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, 1.13), ncol=4, frameon=False,
                     fontsize=8.5, handlelength=1.6, columnspacing=1.2, labelcolor=SECONDARY)
 
@@ -82,14 +82,14 @@ def draw_frame(data, snap):
     lx.axhline(SIGMA ** 2, color=MUTED, linewidth=1.0)
     lx.text(1.3, SIGMA ** 2 * 1.12, "noise level σ²", color=MUTED, fontsize=8.5, va="bottom")
     s, tr, va = hist[:, 0], hist[:, 1], hist[:, 2]
-    lx.plot(s, tr, color=BLUE, linewidth=2, zorder=3)
-    lx.plot(s, va, color=RUST, linestyle="--", linewidth=2, zorder=3)
-    lx.legend(handles=[Line2D([], [], color=BLUE, lw=2, label="training"),
-                       Line2D([], [], color=RUST, lw=2, ls="--", label="validation")],
+    lx.plot(s, tr, color=PLOT_BLUE, linewidth=2, zorder=3)
+    lx.plot(s, va, color=PLOT_ORANGE, linestyle="--", linewidth=2, zorder=3)
+    lx.legend(handles=[Line2D([], [], color=PLOT_BLUE, lw=2, label="training"),
+                       Line2D([], [], color=PLOT_ORANGE, lw=2, ls="--", label="validation")],
               loc="upper right", frameon=False, fontsize=8.5, handlelength=1.4, labelcolor=SECONDARY)
     # direct end labels only once the curves have separated (never stacked on each other)
     separated = abs(np.log10(tr[-1]) - np.log10(va[-1])) > 0.18
-    for series, colour, name in ((tr, BLUE, "training"), (va, RUST, "validation")):
+    for series, colour, name in ((tr, PLOT_BLUE, "training"), (va, PLOT_ORANGE, "validation")):
         lx.scatter(s[-1:], series[-1:], s=44, color=colour, edgecolors=PAPER, linewidths=1.6, zorder=4)
         if separated:
             lx.annotate(name, (s[-1], series[-1]), xytext=(7, -3), textcoords="offset points",
@@ -102,7 +102,7 @@ def draw_frame(data, snap):
     lx.set_xlabel("training step", color=MUTED, fontsize=9, labelpad=2)
     fig.text(0.665, 0.715, "Mean-squared error", color=INK, fontsize=10.5, fontweight="bold")
     fig.text(0.045, 0.035, f"step {step:,}", color=INK, fontsize=11)
-    img = fig_to_image(fig)
+    img = fig_to_image(fig, transparent=True)
     plt.close(fig)
     return img
 

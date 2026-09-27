@@ -5,8 +5,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection, Line3DCollection
 
-from style import (ANIMATION_FIGSIZE, ANIMATION_DPI, PAPER, BLUE, INK, SECONDARY, MUTED, LABEL,
-                   SOLUTION_CMAP, use_course_fonts, fig_to_image, save_gif, style_axes)
+from style import (ANIMATION_FIGSIZE, ANIMATION_DPI, PAPER, PLOT_BLUE, INK, SECONDARY, MUTED, LABEL,
+                   ANIMATION_SOLUTION_CMAP, use_course_fonts, fig_to_image, save_gif, style_axes)
 from fem_lshape import first_eigenpair, LAMBDA_1
 
 LEVELS = (3, 4, 6, 8, 12, 16, 24, 32)
@@ -21,7 +21,7 @@ def surface_polys(pts, tris, u):
     normals /= np.linalg.norm(normals, axis=1, keepdims=True)
     normals[normals[:, 2] < 0] *= -1
     shade = 0.85 + 0.15 * np.clip(normals @ LIGHT, 0.0, 1.0)
-    colours = SOLUTION_CMAP(u[tris].mean(axis=1))[:, :3] * shade[:, None]
+    colours = ANIMATION_SOLUTION_CMAP(u[tris].mean(axis=1))[:, :3] * shade[:, None]
     return verts, np.clip(colours, 0, 1)
 
 
@@ -60,16 +60,16 @@ def draw_frame(sol, k, azim, history):
     cx.set_xlim(12, 5000); cx.set_ylim(1.5e-2, 3.0)
     done = history[:k + 1]
     xs, ys = [d for d, _ in done], [e for _, e in done]
-    cx.plot(xs, ys, color=BLUE, linewidth=2, solid_capstyle="round", solid_joinstyle="round", zorder=2)
-    cx.scatter(xs[:-1], ys[:-1], s=34, color=BLUE, edgecolors=PAPER, linewidths=1.6, zorder=3)
-    cx.scatter(xs[-1:], ys[-1:], s=48, color=BLUE, edgecolors=INK, linewidths=1.8, zorder=4)
+    cx.plot(xs, ys, color=PLOT_BLUE, linewidth=2, solid_capstyle="round", solid_joinstyle="round", zorder=2)
+    cx.scatter(xs[:-1], ys[:-1], s=34, color=PLOT_BLUE, edgecolors=PAPER, linewidths=1.6, zorder=3)
+    cx.scatter(xs[-1:], ys[-1:], s=48, color=PLOT_BLUE, edgecolors=INK, linewidths=1.8, zorder=4)
     cx.annotate(f"{ys[-1]:.3f}", (xs[-1], ys[-1]), xytext=(8, 6), textcoords="offset points",
                 color=INK, fontsize=9)
     cx.set_xlabel("unknowns", color=MUTED, fontsize=9, labelpad=3)
     fig.text(0.70, 0.735, r"Eigenvalue error $\lambda_{1,h}-\lambda_1$", color=INK, fontsize=10.5,
              fontweight="bold")
     fig.text(0.70, 0.695, r"$\lambda_1 \approx 9.6397$", color=MUTED, fontsize=9)
-    img = fig_to_image(fig)
+    img = fig_to_image(fig, transparent=True)
     plt.close(fig)
     return img
 

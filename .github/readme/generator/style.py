@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from matplotlib import font_manager
 from matplotlib.colors import LinearSegmentedColormap
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageColor
 
 # Quiet, print-oriented palette shared by all README graphics.
 PAPER = "#FFFFFF"
@@ -20,6 +20,13 @@ LABEL = "#526170"
 BLUE = "#4D708A"
 RUST = "#A47758"
 LIGHT = "#F3F5F6"
+
+# Vivid data colours for animations; typography keeps the neutral tokens above.
+PLOT_BLUE = "#2878B5"
+PLOT_ORANGE = "#E87524"
+PLOT_PURPLE = "#8056BD"
+ANIMATION_SOLUTION_CMAP = matplotlib.colormaps["viridis"]
+ANIMATION_ERROR_CMAP = matplotlib.colormaps["plasma"]
 
 # Render at native UHD resolution; never enlarge a low-resolution raster.
 ANIMATION_FIGSIZE = (8, 4.5)
@@ -60,37 +67,57 @@ def use_course_fonts():
     })
 
 
-def fig_to_image(fig, size=None):
-    """Render a figure to a PIL image, optionally downsampled for crisp anti-aliasing."""
+def fig_to_image(fig, size=None, transparent=False):
+    """Render at native resolution, preserving alpha for transparent animations."""
+    if transparent:
+        fig.patch.set_alpha(0)
+        for ax in fig.axes:
+            ax.patch.set_alpha(0)
     fig.canvas.draw()
-    img = Image.fromarray(np.asarray(fig.canvas.buffer_rgba())[..., :3].copy())
+    rgba = np.asarray(fig.canvas.buffer_rgba()).copy()
+    img = Image.fromarray(rgba if transparent else rgba[..., :3])
     if size is not None:
-        img = img.resize(size, Image.LANCZOS)
+        img = img.resize(size, Image.Resampling.LANCZOS)
     return img
 
 
-def save_gif(frames, path, durations, colors=256):
-    """Write a UHD GIF with a stable full palette and a lossless final still.
+def save_gif(frames, path, durations):
+    """Write transparent UHD frames with a shared 255-colour data palette.
 
-    Every frame contributes to the palette. Small palette-training previews keep
-    memory bounded without reducing the resolution of the encoded frames.
+    GIF reserves the final palette entry for one-bit transparency. Restore the
+    transparent background between frames so moving curves leave no trails.
+    The final PNG retains full colour and smooth alpha at antialiased edges.
     """
     thumb_size = (480, 270)
-    sample = Image.new("RGB", (thumb_size[0], thumb_size[1] * len(frames)))
+    sample = Image.new("RGB", (thumb_size[0], thumb_size[1] * len(frames)), "white")
     for k, frame in enumerate(frames):
-        sample.paste(frame.resize(thumb_size, Image.Resampling.LANCZOS),
-                     (0, k * thumb_size[1]))
-    palette = sample.quantize(colors=colors, method=Image.Quantize.MEDIANCUT)
-    # Preserve the exact white page background after adaptive quantisation.
-    entries = palette.getpalette()
-    whitest = max(range(colors), key=lambda i: sum(entries[3 * i:3 * i + 3]))
-    entries[3 * whitest:3 * whitest + 3] = [255, 255, 255]
+        thumb = frame.convert("RGBA").resize(thumb_size, Image.Resampling.LANCZOS)
+        sample.paste(thumb, (0, k * thumb_size[1]), thumb.getchannel("A"))
+    # Reserve exact text and series colours: adaptive quantisation alone can
+    # merge small dark labels into a purple or blue from a large colour plot.
+    fixed = [PAPER, INK, SECONDARY, MUTED, GRID, PLOT_BLUE, PLOT_ORANGE, PLOT_PURPLE]
+    adaptive_colors = 255 - len(fixed)
+    palette = sample.quantize(colors=adaptive_colors, method=Image.Quantize.MEDIANCUT)
+    entries = palette.getpalette()[:3 * adaptive_colors]
+    entries += [channel for color in fixed for channel in ImageColor.getrgb(color)]
+    # Duplicate an existing colour in the reserved slot, then explicitly remap
+    # that slot before assigning transparency. White plotted details stay opaque.
+    entries += entries[:3]
     palette.putpalette(entries)
-    # Dithering preserves subtle surface gradients within GIF's colour limit.
-    quantised = [frame.quantize(palette=palette, dither=Image.Dither.FLOYDSTEINBERG)
-                 for frame in frames]
+    quantised = []
+    for frame in frames:
+        rgba = frame.convert("RGBA")
+        # Use straight RGB at edges: no white matte around text on other themes.
+        rgb = rgba.convert("RGB")
+        indexed = rgb.quantize(palette=palette, dither=Image.Dither.FLOYDSTEINBERG)
+        pixels = np.array(indexed)
+        pixels[pixels == 255] = 0
+        pixels[np.asarray(rgba.getchannel("A")) < 128] = 255
+        indexed = Image.fromarray(pixels)
+        indexed.putpalette(entries)
+        quantised.append(indexed)
     quantised[0].save(path, save_all=True, append_images=quantised[1:], duration=durations,
-                      loop=0, optimize=False, disposal=1)
+                      loop=0, optimize=False, disposal=2, transparency=255, background=255)
     path = Path(path)
     frames[-1].save(path.with_name(path.stem + "_still.png"), optimize=True)
 
