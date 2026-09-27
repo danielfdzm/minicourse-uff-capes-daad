@@ -1,0 +1,15 @@
+[2026-04-20 01:02:44.957] [info] Checking required entities per dimension
+[2026-04-20 01:02:44.957] [info] Cell type: 0 dofmap: 2048x1
+[2026-04-20 01:02:44.957] [info] Global index computation
+[2026-04-20 01:02:44.957] [info] Got 1 index_maps
+[2026-04-20 01:02:44.957] [info] Get global indices
+[2026-04-20 01:02:48.003] [info] Opened HDF5 file with id "72057594037927936"
+[2026-04-20 01:02:48.003] [info] Adding mesh to node "/Xdmf/Domain"
+[2026-04-20 01:02:48.003] [info] Adding topology data to node /Xdmf/Domain/Grid
+[2026-04-20 01:02:48.003] [info] Adding geometry data to node "/Xdmf/Domain/Grid"
+[2026-04-20 01:02:48.004] [info] Adding function to node "/Xdmf/Domain/Grid/Grid"
+
+Newton solver converged in 2 iterations
+Solutions saved to nonlinear_poisson.png and nonlinear_poisson_3d.png
+Saved nonlinear_kappa_hist.png
+Solution exported to nonlinear_poisson.xdmf

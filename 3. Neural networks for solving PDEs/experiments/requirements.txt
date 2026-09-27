@@ -1,0 +1,4 @@
+# Versions used to generate the supplied results (Python 3.14.0, CPU).
+numpy==2.3.5
+torch==2.10.0
+matplotlib==3.10.7

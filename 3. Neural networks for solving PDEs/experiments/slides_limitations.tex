@@ -1,0 +1,150 @@
+% References and claim scope: experiments/limitations_sources.md.
+\renewcommand{\slideid}{L3}
+\section{Why classical solvers remain essential}
+
+\renewcommand{\slideid}{L3-C01}
+\begin{frame}[c]{Why classical numerical methods are still used}
+\small
+\guidingquestion{Can we reach a requested error tolerance at a predictable cost?}
+\begin{slideitems}
+\item \textbf{Controlled refinement:} mesh size, polynomial degree, and time step
+give systematic ways to improve a discretization.
+\item \textbf{Efficient algebra:} sparse matrices, preconditioners, and multigrid
+exploit the structure of many PDEs.
+\item \textbf{Physical structure:} appropriate finite-volume, mixed, or compatible
+schemes can enforce conservation or other identities by construction.
+\item \textbf{Established practice:} error estimation, complex geometry handling,
+and extensively tested implementations.
+\end{slideitems}
+\begin{block}{A published benchmark}
+In the PDE benchmarks of Grossmann et al., PINNs did not beat FEM in
+solution time and accuracy on the problems tested.
+\end{block}
+\labnote{\href{https://arxiv.org/abs/2302.04107}{Grossmann et al., IMA J. Applied Mathematics (2024).}}
+\end{frame}
+
+\renewcommand{\slideid}{L3-C02}
+\begin{frame}[c]{A classical route from approximation to accuracy}
+\small
+For conforming FEM ($V_h\subset V$) with bounded, coercive $a$,
+C\'ea's lemma gives
+\[
+ \norm{u-u_h}_V\le \frac{M}{\alpha}
+       \inf_{v_h\in V_h}\norm{u-v_h}_V.
+\]
+Here $M$ is the continuity constant and $\alpha>0$ the coercivity constant;
+$u_h$ is the exactly solved Galerkin approximation.
+\begin{slideitems}
+\item With sufficient regularity and suitable meshes, approximation estimates
+turn this into an explicit rate in $h$ and polynomial degree.
+\item Reliable a posteriori estimators are available for many problem classes
+and can guide local refinement.
+\end{slideitems}
+\begin{block}{A finite-tolerance solve still needs an error budget}
+\[
+\norm{u-\widetilde u_h}_V
+\le \underbrace{\norm{u-u_h}_V}_{\text{discretization}}
+  + \underbrace{\norm{u_h-\widetilde u_h}_V}_{\text{algebraic solve}}.
+\]
+Nonlinear, singular, or unstable problems still require appropriate analysis.
+\end{block}
+\end{frame}
+
+\renewcommand{\slideid}{L3-C03}
+\begin{frame}[c]{What a PINN error bound requires}
+\small
+\begin{block}{An error estimate under two assumptions}
+If PDE stability gives $\norm{u-u_\theta}_X\le C_{\rm stab}\sqrt{\Loss(\theta)}$
+and sampling gives $\Loss(\theta)\le\widehat\Loss(\theta)+\varepsilon_Q$, then
+\[
+ \norm{u-u_\theta}_X\le
+ C_{\rm stab}\sqrt{\widehat\Loss(\theta)+\varepsilon_Q}.
+\]
+The loss must include the right residual and boundary norms for this PDE.
+\end{block}
+\begin{slideitems}
+\item \textbf{Representation:} a good network may exist; training need not find it.
+\item \textbf{Sampling:} a useful $\varepsilon_Q$ requires regularity and coverage,
+with control valid for the network selected by training.
+\item \textbf{Optimization:} a bound assuming small training error does not
+prove Adam or L-BFGS reaches it at an affordable cost.
+\end{slideitems}
+\labnote{\href{https://arxiv.org/abs/2006.16144}{Mishra--Molinaro (2023)};
+\href{https://doi.org/10.1017/S0962492923000089}{De Ryck--Mishra, Acta Numerica (2024)}.
+Norms, rates, and constants depend on the PDE and formulation.}
+\end{frame}
+
+\renewcommand{\slideid}{L3-C05}
+\begin{frame}[c]{Small training loss can still hide a wrong solution}
+\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.30\textwidth}>{\raggedright\arraybackslash}p{0.65\textwidth}@{}}
+\toprule
+Difficulty & What can go wrong\\
+\midrule
+Finite collocation & Residual peaks or thin layers fall between training points.\\
+Multiple scales & Oscillations and sharp features can learn much more slowly
+than the smooth background.\\
+Time dependence & Small early-time errors and an unbalanced space--time loss
+can spoil long-time predictions.\\
+Physical constraints & A generic pointwise loss does not exactly impose cell
+conservation, positivity, or an entropy inequality.\\
+\bottomrule
+\end{tabular}
+\begin{block}{Adding data does not remove these issues}
+Noisy or sparse observations introduce their own weighting and
+identifiability questions, as the inverse experiment demonstrated.
+\end{block}
+\labnote{\href{https://arxiv.org/abs/2109.01050}{Krishnapriyan et al., NeurIPS (2021)};
+\href{https://arxiv.org/abs/2007.14527}{Wang--Yu--Perdikaris, JCP (2022)}.
+These are possible failure modes, not unavoidable outcomes.}
+\end{frame}
+
+\renewcommand{\slideid}{L3-C09}
+\begin{frame}[c]{What helps PINNs, and what still needs checking}
+\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.41\textwidth}>{\raggedright\arraybackslash}p{0.54\textwidth}@{}}
+\toprule
+Possible improvement & Remaining check\\
+\midrule
+Hard boundary constraints & Interior PDE accuracy and ansatz suitability.\\
+Adaptive collocation & Independent residual evaluation and correct sampling weights.\\
+Feature scaling, domain splitting & Resolution of every relevant physical scale.\\
+Better conditioning and optimizers & Actual solution error; convergence is still problem-dependent.\\
+Weak or variational formulations & Stability, quadrature, and the chosen test space.\\
+\bottomrule
+\end{tabular}
+\begin{block}{Check whether the change helps}
+Measure the solution error before and after each change. Improvements
+depend on the PDE, sampling, and training setup.
+\end{block}
+\labnote{\href{https://doi.org/10.1017/S0962492923000089}{De Ryck--Mishra (2024)};
+\href{https://proceedings.mlr.press/v235/rathore24a.html}{Rathore et al. (2024)}.}
+\end{frame}
+
+\renewcommand{\slideid}{L3-C11}
+\begin{frame}[c]{Where neural PDE solvers can have an advantage}
+\small
+\begin{slideitems}
+\setlength\itemsep{0.8em}
+\item \textbf{High-dimensional settings.} Neural representations and stochastic
+sampling avoid the exponential size of tensor grids. For PDEs with exploitable
+structure, this can make otherwise infeasible computations practical.
+\item \textbf{Inverse problems with sparse or poorly distributed data.}
+Jointly fit the state and unknown coefficients, using the PDE to constrain
+regions with few measurements. This can avoid repeated full forward solves;
+identifiability still requires informative observations.
+\item \textbf{Complex geometry.} Meshfree formulations use interior and boundary
+samples, reducing volume-meshing and remeshing effort for intricate or changing
+domains. Accurate boundary representation and enforcement remain essential.
+\end{slideitems}
+\par\medskip
+Compare total cost at matched accuracy, including training and geometry preparation.
+\par\medskip
+\labnote{Examples: \href{https://arxiv.org/abs/1707.02568}{Han--Jentzen--E (2018)};
+\href{https://doi.org/10.1126/science.aaw4741}{Raissi et al. (2020)};
+\href{https://arxiv.org/abs/2104.08426}{Sukumar--Srivastava (2022)}.}
+\end{frame}
+
+\renewcommand{\slideid}{L3}

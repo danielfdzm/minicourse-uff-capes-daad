@@ -1,0 +1,35 @@
+Traceback (most recent call last):
+  File "/Users/eg75agon/fenics_seminar/.conda/lib/python3.11/site-packages/pkgconfig/pkgconfig.py", line 91, in _wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/eg75agon/fenics_seminar/.conda/lib/python3.11/site-packages/pkgconfig/pkgconfig.py", line 125, in exists
+    return call(cmd) == 0
+           ^^^^^^^^^
+  File "/Users/eg75agon/fenics_seminar/.conda/lib/python3.11/subprocess.py", line 389, in call
+    with Popen(*popenargs, **kwargs) as p:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/eg75agon/fenics_seminar/.conda/lib/python3.11/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/Users/eg75agon/fenics_seminar/.conda/lib/python3.11/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'pkg-config'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/eg75agon/fenics_seminar/experiment1_slides_exact.py", line 1, in <module>
+    from fenics import *
+  File "/Users/eg75agon/fenics_seminar/.conda/lib/python3.11/site-packages/fenics/__init__.py", line 7, in <module>
+    from dolfin import *
+  File "/Users/eg75agon/fenics_seminar/.conda/lib/python3.11/site-packages/dolfin/__init__.py", line 142, in <module>
+    from .fem.assembling import (assemble, assemble_system, assemble_multimesh,
+  File "/Users/eg75agon/fenics_seminar/.conda/lib/python3.11/site-packages/dolfin/fem/assembling.py", line 34, in <module>
+    from dolfin.fem.form import Form
+  File "/Users/eg75agon/fenics_seminar/.conda/lib/python3.11/site-packages/dolfin/fem/form.py", line 12, in <module>
+    from dolfin.jit.jit import dolfin_pc, ffc_jit
+  File "/Users/eg75agon/fenics_seminar/.conda/lib/python3.11/site-packages/dolfin/jit/jit.py", line 15, in <module>
+    if pkgconfig.exists("dolfin"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/eg75agon/fenics_seminar/.conda/lib/python3.11/site-packages/pkgconfig/pkgconfig.py", line 93, in _wrapper
+    raise EnvironmentError("pkg-config probably not installed: %r" % e)
+OSError: pkg-config probably not installed: FileNotFoundError(2, 'No such file or directory')

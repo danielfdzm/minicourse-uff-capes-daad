@@ -1,0 +1,117 @@
+{
+  "note": "Explicit network sequences; no optimizer or training is involved.",
+  "source_note": "Worked tanh illustrations of the mechanism, not examples quoted from arXiv:2606.04018.",
+  "pde": "-u''=0 on (0,1)",
+  "bump": {
+    "boundary_conditions": "u(0)=u(1)=0",
+    "exact_solution": "0",
+    "network": "[tanh(k*(x-a))-tanh(k*(x-b))-(tanh(k*b)-tanh(k*a))]/2",
+    "a": 0.3333333333333333,
+    "b": 0.6666666666666667,
+    "k": [
+      8,
+      16,
+      32,
+      64,
+      128,
+      256
+    ],
+    "collocation_x": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "sampled_residual_rms": [
+      25.25807500878615,
+      44.543394495782636,
+      15.838376047794858,
+      0.31178796293115724,
+      2.9072699065254538e-05,
+      6.318244062072734e-14
+    ],
+    "l2_error": [
+      0.456516275720941,
+      0.5204165014814162,
+      0.549621081594705,
+      0.5636562191028618,
+      0.5705443307345481,
+      0.5739573880814963
+    ],
+    "continuous_residual_l2": [
+      18.335653854729365,
+      46.84786180070411,
+      132.19785022503459,
+      373.91193259019343,
+      1057.5826524043719,
+      2991.295460721547
+    ],
+    "l2_error_limit": 0.5773502691896258,
+    "reported_residuals_floored_or_truncated": false
+  },
+  "nonattainment": {
+    "boundary_conditions": "u(0)=0, u(1)=1",
+    "exact_solution": "x",
+    "network": "tanh(x/n)/tanh(1/n)",
+    "architecture": "Finite shallow tanh network, linear output, no linear skip connection.",
+    "n": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "l2_error": [
+      0.07685525122251714,
+      0.021911269351974308,
+      0.005679630208103314,
+      0.0014331592260475715,
+      0.00035912859617955885,
+      8.983474083634252e-05
+    ],
+    "continuous_residual_l2": [
+      0.8136728784936612,
+      0.25913492538736055,
+      0.07013436102531162,
+      0.017911765045567563,
+      0.0045023443310838514,
+      0.0011271236244755074
+    ],
+    "continuous_residual_loss": [
+      0.6620635531961604,
+      0.06715090955551292,
+      0.004918828596428749,
+      0.000320831327047616,
+      2.0271104475642892e-05,
+      1.2704076648508046e-06
+    ],
+    "output_weight": [
+      1.3130352854993315,
+      2.163953413738653,
+      4.082988165073597,
+      8.041623328375596,
+      16.020827910003682,
+      32.010415988561334
+    ],
+    "n_to_fourth_times_residual_loss": [
+      0.6620635531961604,
+      1.0744145528882068,
+      1.2592201206857598,
+      1.314125115587035,
+      1.3284871029157326,
+      1.3321189875785973
+    ]
+  },
+  "verification": {
+    "quadrature": "Composite trapezoidal rule on 65537 equally spaced nodes.",
+    "refinement_nodes": 131073,
+    "l2_grid_refinement_max_difference": 1.1102230246251565e-16,
+    "bump_boundary_max_abs": 5.551115123125783e-17,
+    "nonattainment_boundary_max_abs": 0.0,
+    "bump_second_derivative_relative_fd_error_max": 7.21873961370274e-10,
+    "nonattainment_second_derivative_relative_fd_error_max": 4.449494989558129e-08,
+    "limit_check_k": 4096,
+    "limit_check_l2": 0.5771387984777435,
+    "limit_check_l2_difference": 0.00021147071188232225
+  }
+}

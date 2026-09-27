@@ -1,0 +1,56 @@
+{
+  "experiment": "2D Poisson PINN with exact homogeneous Dirichlet enforcement",
+  "equation": "-Delta u = 2*pi^2*sin(pi*x)*sin(pi*y) on [0,1]^2",
+  "exact_solution": "sin(pi*x)*sin(pi*y); diagnostics only",
+  "ansatz": "x*(1-x)*y*(1-y)*MLP(2*[x,y]-1)",
+  "architecture": [
+    2,
+    32,
+    32,
+    32,
+    1
+  ],
+  "activation": "tanh",
+  "dtype": "float64",
+  "device": "cpu",
+  "threads": 1,
+  "parameter_count": 2241,
+  "config": {
+    "seed": 7,
+    "width": 32,
+    "collocation": 1024,
+    "grid_size": 101,
+    "adam_steps": 2000,
+    "lbfgs_steps": 600,
+    "learning_rate": 0.001,
+    "output_dir": "/Users/eg75agon/Downloads/nn_pde_3/experiments/results"
+  },
+  "sampling": "fixed scrambled Sobol collocation; uniform diagnostic grid",
+  "training_labels": "none; forcing and hard boundary condition only",
+  "residual_normalization": "r=(-Delta u-f)/(2*pi**2); loss=mean(r**2)",
+  "loss_axis": "objective evaluation; 0=Adam before update, 1=LBFGS closure/final",
+  "array_order": "(y, x)",
+  "metrics": {
+    "relative_l2": 6.426613391835505e-06,
+    "max_abs_error": 9.44727376159249e-06,
+    "boundary_max_abs": 0.0,
+    "train_normalized_residual_mse": 1.3899372528583266e-08,
+    "test_normalized_residual_mse": 1.5505365704700518e-08,
+    "test_normalized_residual_rms": 0.00012452054330390835,
+    "interior_test_normalized_residual_rms": 0.00011377647901445182,
+    "training_seconds": 18.92892862507142,
+    "total_seconds": 18.98820937506389,
+    "loss_evaluations": 2662,
+    "lbfgs_closure_evaluations": 661
+  },
+  "versions": {
+    "python": "3.14.0 (v3.14.0:ebf955df7a8, Oct  7 2025, 08:20:14) [Clang 16.0.0 (clang-1600.0.26.6)]",
+    "torch": "2.10.0",
+    "numpy": "2.3.5",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O"
+  },
+  "provenance": {
+    "script": "poisson_2d.py",
+    "script_sha256": "4eb2323fc9ae68e97c52d39d7ac2d5fc9bf0fba0eceb7316ae5da4cf2109da56"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "experiment": "1D hybrid inverse diffusion PINN",
+  "equation": "-k u''(x) = pi^2 sin(pi x), x in (0,1); u(0)=u(1)=0",
+  "true_solution": "u(x) = sin(pi x)/0.7",
+  "seed": 23,
+  "device": "cpu",
+  "dtype": "float64",
+  "threads": 1,
+  "python_version": "3.14.0",
+  "torch_version": "2.10.0",
+  "numpy_version": "2.3.5",
+  "architecture": "1 -> 32 tanh -> 32 tanh -> 1; u=x(1-x)net(x)",
+  "positivity": "k=softplus(raw_k)+1e-6",
+  "true_k": 0.7,
+  "initial_k": 1.3,
+  "same_initial_parameters_for_both_models": true,
+  "sensor_count": 12,
+  "noise": "Independent additive Gaussian; sigma=1% of exact peak amplitude",
+  "noise_sigma": 0.014285714285714287,
+  "collocation_count": 128,
+  "collocation": "128 fixed equally spaced interior points",
+  "loss": "mean((-k*u_xx/pi^2-sin(pi*x))^2) + data_weight*mean((u(x_data)-y_data)^2)",
+  "hybrid_data_weight": 5.0,
+  "physics_only_data_weight": 0.0,
+  "optimizer": {
+    "adam_steps": 4000,
+    "adam_learning_rate": 0.001,
+    "lbfgs_outer_steps": 40,
+    "lbfgs_max_inner_iterations": 5,
+    "lbfgs_line_search": "strong_wolfe"
+  },
+  "history_sampling": "initial state, every 20 Adam updates, each L-BFGS outer step",
+  "history_phase_codes": {
+    "0": "Adam",
+    "1": "L-BFGS"
+  },
+  "held_out_evaluation": "1000 uniform cell midpoints, independent of collocation and sensors",
+  "interpretation": "Physics-only inverse training is nonidentifiable: for every k>0, sin(pi*x)/k solves the same PDE and boundary conditions. The selected physics-only k is one optimizer outcome, not a uniquely inferred value.",
+  "metrics": {
+    "hybrid": {
+      "inferred_k": 0.7007405946951775,
+      "k_relative_error_percent": 0.10579924216821572,
+      "held_out_relative_l2": 0.003143717781003033,
+      "normalized_residual_rms": 0.008710877164733745,
+      "final_physics_loss": 7.654241551718205e-05,
+      "final_sensor_mse": 0.00018673113213294368,
+      "elapsed_seconds": 7.131256791064516,
+      "loss_evaluations": 4275,
+      "boundary_values": [
+        0.0,
+        0.0
+      ]
+    },
+    "physics_only": {
+      "inferred_k": 1.3897273365907044,
+      "k_relative_error_percent": 98.53247665581492,
+      "held_out_relative_l2": 0.49630426419115903,
+      "normalized_residual_rms": 0.0002059836393784022,
+      "final_physics_loss": 3.631803064087942e-08,
+      "final_sensor_mse": 0.25501385680582644,
+      "elapsed_seconds": 6.192950792028569,
+      "loss_evaluations": 4293,
+      "boundary_values": [
+        0.0,
+        0.0
+      ]
+    }
+  }
+}

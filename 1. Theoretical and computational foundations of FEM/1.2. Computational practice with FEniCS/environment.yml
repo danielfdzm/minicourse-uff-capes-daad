@@ -1,0 +1,18 @@
+# FEniCSx environment for the Chapter 1.2 examples.
+# Tested with DOLFINx 0.10.0, PyVista 0.47, MPICH and gmsh 4.15 (Python 3.14).
+#
+#   conda env create -f environment.yml
+#   conda activate fenicsx-env
+name: fenicsx-env
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.11
+  - fenics-dolfinx>=0.10
+  - mpich
+  - pyvista
+  - scipy
+  - matplotlib
+  - pip
+  - pip:
+      - gmsh

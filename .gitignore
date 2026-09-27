@@ -1,0 +1,27 @@
+# LaTeX build products (the PDFs are kept)
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+!**/results/logs/*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.synctex.gz
+.latexbuild/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.mplconfig/
+.venv/
+
+# Local environments and editor settings
+.conda/
+.vscode/
+
+# macOS
+.DS_Store

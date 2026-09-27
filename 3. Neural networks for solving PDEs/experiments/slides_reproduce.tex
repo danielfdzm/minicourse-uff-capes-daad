@@ -1,0 +1,19 @@
+\renewcommand{\slideid}{L3-PY13}
+\begin{frame}[c]{Make the numerical experiments reproducible}
+\small
+\begin{slideitems}
+\item \textbf{Record the setup:} architecture, activation, precision, random
+seed, optimizer settings, and training budget.
+\item \textbf{Separate training and evaluation:} assess the learned solution
+on independent points, including boundaries and difficult regions.
+\item \textbf{Compare the same quantities:} use the same evaluation norms,
+reference solution, and evaluation grid for every method.
+\item \textbf{Check variability:} repeat with several seeds and report both
+typical errors and the spread of the results.
+\end{slideitems}
+\begin{block}{Try changing one setting}
+Change one ingredient at a time: the sampling density, activation, or
+optimizer. Keep the other settings fixed and track solution error as well
+as the training objective.
+\end{block}
+\end{frame}

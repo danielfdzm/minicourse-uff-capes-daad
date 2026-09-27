@@ -1,0 +1,12 @@
+# Standalone teaching notebook. Tested versions are recorded in notebook_outputs/run_summary.json.
+numpy>=2.0,<3
+scipy>=1.13,<2
+matplotlib>=3.8,<4
+torch>=2.2,<3
+plotly>=5.24,<7
+ipython>=8,<10
+ipykernel>=6,<8
+jupyterlab>=4,<5
+# Needed only for validating/rebuilding the notebook automatically:
+nbformat>=5.10,<6
+nbclient>=0.10,<0.11

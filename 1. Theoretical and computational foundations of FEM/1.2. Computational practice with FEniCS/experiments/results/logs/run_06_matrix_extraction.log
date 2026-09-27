@@ -1,0 +1,22 @@
+Stiffness matrix: (289, 289), nnz = 1889
+Mass matrix:      (289, 289), nnz = 1889
+Sparsity:         2.26%
+Reduced matrix:   (225, 225), nnz = 1457
+
+First 10 Laplacian eigenvalues on [0,1]^2:
+      Computed          Exact      Rel Error
+  ------------------------------------------
+     19.929790      19.739209   9.65e-03
+     50.166387      49.348022   1.66e-02
+     50.632876      49.348022   2.60e-02
+     81.971343      78.956835   3.82e-02
+    102.460390      98.696044   3.81e-02
+    102.545230      98.696044   3.90e-02
+    133.946554     128.304857   4.40e-02
+    138.002055     128.304857   7.56e-02
+    178.063872     167.783275   6.13e-02
+    178.348666     167.783275   6.30e-02
+
+Eigenfunctions saved to eigenfunctions.png
+Saved eigenmode1_3d.png
+Saved eigenvalue_comparison.png and eigenvalue_parity.png

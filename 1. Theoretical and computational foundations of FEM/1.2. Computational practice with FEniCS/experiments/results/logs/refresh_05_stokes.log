@@ -1,0 +1,6 @@
+Velocity DOFs: 4225
+Pressure DOFs: 1089
+Total DOFs:    9539
+Solution saved to stokes_cavity.png
+Additional 3D plot saved to stokes_cavity_3d.png
+Solutions exported to stokes_velocity.xdmf and stokes_pressure.xdmf

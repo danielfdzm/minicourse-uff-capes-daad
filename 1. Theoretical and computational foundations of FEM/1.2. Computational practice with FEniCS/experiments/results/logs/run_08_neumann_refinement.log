@@ -1,0 +1,63 @@
+/Users/eg75agon/fenics_seminar/08_neumann_refinement.py:14: SyntaxWarning: "\ " is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\ "? A raw string is also an option.
+  Omega = [-1, 1]^2 \ [0, 1] x [-1, 0]
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 7 (Line)
+Info    : [ 20%] Meshing curve 8 (Line)
+Info    : [ 40%] Meshing curve 9 (Line)
+Info    : [ 60%] Meshing curve 10 (Line)
+Info    : [ 70%] Meshing curve 11 (Line)
+Info    : [ 90%] Meshing curve 12 (Line)
+Info    : Done meshing 1D (Wall 0.00141125s, CPU 0.001852s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 0.00546379s, CPU 0.005994s)
+Info    : 149 nodes 301 elements
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 7 (Line)
+Info    : [ 20%] Meshing curve 8 (Line)
+Info    : [ 40%] Meshing curve 9 (Line)
+Info    : [ 60%] Meshing curve 10 (Line)
+Info    : [ 70%] Meshing curve 11 (Line)
+Info    : [ 90%] Meshing curve 12 (Line)
+Info    : Done meshing 1D (Wall 0.001435s, CPU 0.00233s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 0.00307033s, CPU 0.005014s)
+Info    : 186 nodes 375 elements
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 7 (Line)
+Info    : [ 20%] Meshing curve 8 (Line)
+Info    : [ 40%] Meshing curve 9 (Line)
+Info    : [ 60%] Meshing curve 10 (Line)
+Info    : [ 70%] Meshing curve 11 (Line)
+Info    : [ 90%] Meshing curve 12 (Line)
+Info    : Done meshing 1D (Wall 0.00223908s, CPU 0.003318s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 0.00436004s, CPU 0.006957s)
+Info    : 258 nodes 519 elements
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 7 (Line)
+Info    : [ 20%] Meshing curve 8 (Line)
+Info    : [ 40%] Meshing curve 9 (Line)
+Info    : [ 60%] Meshing curve 10 (Line)
+Info    : [ 70%] Meshing curve 11 (Line)
+Info    : [ 90%] Meshing curve 12 (Line)
+Info    : Done meshing 1D (Wall 0.00244696s, CPU 0.003961s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 0.00805487s, CPU 0.011772s)
+Info    : 381 nodes 765 elements
+Level 0: h_near=0.1100, dofs=148, QoI=1.76155181e-02
+Level 1: h_near=0.0600, dofs=185, QoI=1.76566016e-02
+Level 2: h_near=0.0320, dofs=257, QoI=1.76818463e-02
+Level 3: h_near=0.0180, dofs=380, QoI=1.76908820e-02
+
+QoI errors vs finest level:
+  Level 0: |Q - Q_ref| = 7.536381e-05
+  Level 1: |Q - Q_ref| = 3.428036e-05
+  Level 2: |Q - Q_ref| = 9.035619e-06
+  Level 3: |Q - Q_ref| = 0.000000e+00
+
+Saved neumann_refinement.png
+Saved neumann_refinement_qoi.png

@@ -1,0 +1,238 @@
+{
+  "versions": {
+    "python": "3.13.9",
+    "numpy": "2.4.2",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "torch": "2.10.0",
+    "plotly": "6.9.0"
+  },
+  "run_mode": "quick",
+  "seed": 7,
+  "budgets": {
+    "adam_1d": 900,
+    "lbfgs_1d": 180,
+    "adam_2d": 1100,
+    "lbfgs_2d": 260,
+    "boundary_adam": 900
+  },
+  "device": "cpu",
+  "dtype": "torch.float64",
+  "local_seeds": {
+    "forward": 7,
+    "inverse": 23,
+    "high_dimension": 1701,
+    "annulus": 1702,
+    "reaction_diffusion": 92
+  },
+  "additional_settings": {
+    "inverse_adam": 1000,
+    "inverse_lbfgs": 140,
+    "inverse_sensors": 10,
+    "inverse_noise_sd": 0.028571428571428574,
+    "annulus_lbfgs": 130,
+    "annulus_points": 512,
+    "high_dim_repeats": 16,
+    "reaction_steps": 6500,
+    "reaction_dt": 0.9,
+    "reaction_grid": 96,
+    "reaction_parameters": [
+      [
+        0.035,
+        0.06
+      ],
+      [
+        0.025,
+        0.06
+      ],
+      [
+        0.04,
+        0.062
+      ]
+    ]
+  },
+  "expanded_experiments": {
+    "multiscale": {
+      "seed": 314,
+      "k": 8,
+      "amplitude": 0.15,
+      "feature_frequencies": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "points": 128,
+      "sampling": "fixed interior midpoints",
+      "width": 24,
+      "hidden_layers": 2,
+      "adam_steps": 450,
+      "adam_learning_rate": 0.002,
+      "lbfgs_max_iter": 100,
+      "residual_normalization": 67.35959813095556,
+      "exact_boundary_factor": "x*(1-x)",
+      "device": "cpu",
+      "dtype": "float64",
+      "threads": 1,
+      "parameter_counts": {
+        "Plain tanh": 673,
+        "Fourier features": 817
+      }
+    },
+    "adaptive": {
+      "seed": 71,
+      "points_per_step": 40,
+      "candidate_count": 1000,
+      "hidden_features": 64,
+      "stages": 24,
+      "steps_per_stage": 100,
+      "learning_rate": 0.015,
+      "stage_lr_decay": 0.75,
+      "uniform_mixture": 0.35,
+      "center": 0.63,
+      "width": 0.025,
+      "residual_scale": 1000.0
+    },
+    "heat": {
+      "seed": 121,
+      "diffusivity": 0.08,
+      "points": 768,
+      "width": 32,
+      "depth": 2,
+      "adam_steps": 1200,
+      "lbfgs_steps": 240,
+      "final_time": 1.0,
+      "trial": "u0(x) + t*x*(1-x)*N(x,t)"
+    },
+    "parametric": {
+      "seed": 1313,
+      "mu_max": 30.0,
+      "collocation": 768,
+      "width": 32,
+      "depth": 3,
+      "adam_steps": 1000,
+      "lbfgs_steps": 220,
+      "fd_interior_nodes": 63
+    }
+  },
+  "static_figures": [
+    "01_membrane",
+    "02_pinn_vs_ritz",
+    "03_boundary_balance",
+    "04_poisson_square",
+    "05_coercivity_counterexamples",
+    "inverse_sensor_design",
+    "inverse_solution_family_and_valley",
+    "extra_high_dimension",
+    "extra_annulus_solution",
+    "extra_annulus_diagnostics",
+    "09_reaction_patterns",
+    "10_multiscale_comparison",
+    "11_adaptive_accuracy",
+    "11_adaptive_sampling_maps",
+    "12_heat_space_time",
+    "13_parametric_solver"
+  ],
+  "interactive_figures": [
+    "01_membrane_interactive",
+    "04_poisson_explorer",
+    "extra_annulus_interactive",
+    "09_reaction_interactive",
+    "10_multiscale_learning",
+    "12_heat_profiles_interactive",
+    "13_parametric_interactive"
+  ],
+  "metrics": [
+    {
+      "experiment": "Hard PINN",
+      "relative_l2": 3.72494367702728e-06,
+      "seconds": 2.2681251249741763
+    },
+    {
+      "experiment": "Deep Ritz",
+      "relative_l2": 1.8118949285961692e-05,
+      "seconds": 1.1021278330590576
+    },
+    {
+      "experiment": "Square Poisson PINN",
+      "relative_l2": 9.707106684738989e-06,
+      "seconds": 13.897111165919341
+    },
+    {
+      "experiment": "Multiscale: Plain tanh",
+      "relative_l2": 0.1681031967128126,
+      "residual_rms": 7.101513395294625,
+      "parameters": 673,
+      "seconds": 1.0935492080170661,
+      "objective_evaluations": 565,
+      "boundary_max_abs": 0.0,
+      "mode_1": 1.1511689208431937,
+      "mode_8": 0.14886944555747683
+    },
+    {
+      "experiment": "Multiscale: Fourier features",
+      "relative_l2": 0.0035440157394061914,
+      "residual_rms": 0.1838708002926655,
+      "parameters": 817,
+      "seconds": 1.3914584160083905,
+      "objective_evaluations": 555,
+      "boundary_max_abs": 0.0,
+      "mode_1": 1.003557386105789,
+      "mode_8": 0.15000214108200646
+    },
+    {
+      "experiment": "Adaptive sampling / Fixed uniform",
+      "relative_l2": 0.270793552488712,
+      "seconds": 0.4192797919968143,
+      "residual_rms": 333.5117074360569,
+      "extra_candidate_evaluations": 0
+    },
+    {
+      "experiment": "Adaptive sampling / Uniform refresh",
+      "relative_l2": 0.17217508670156356,
+      "seconds": 0.5284387499559671,
+      "residual_rms": 5.255178226421055,
+      "extra_candidate_evaluations": 0
+    },
+    {
+      "experiment": "Adaptive sampling / Residual adaptive",
+      "relative_l2": 0.07098392004907673,
+      "seconds": 0.46642787498421967,
+      "residual_rms": 5.087934505874919,
+      "extra_candidate_evaluations": 23000
+    },
+    {
+      "experiment": "Heat space-time PINN",
+      "relative_l2": 0.0001811771228648491,
+      "residual_rms": 0.0037194415945214993,
+      "seconds": 8.682236291002482
+    },
+    {
+      "experiment": "Parameter-conditioned PINN",
+      "relative_l2": 0.0003577962458694303,
+      "maximum_parameter_error": 0.001240952187082041,
+      "normalized_residual_rms": 0.0006117287775405446,
+      "seconds": 11.821695458027534
+    },
+    {
+      "experiment": "Inverse: Interior sensors",
+      "relative_l2": 0.0067428002603553295,
+      "kappa": 0.7028632318787517,
+      "kappa_exact_model": 0.7033670939624387
+    },
+    {
+      "experiment": "Inverse: Boundary clusters",
+      "relative_l2": 0.046593493906939724,
+      "kappa": 0.7341988017104029,
+      "kappa_exact_model": 0.7341091401028318
+    },
+    {
+      "experiment": "Annulus PINN",
+      "relative_l2": 0.0002951106384787639,
+      "residual_rms": 0.002443094935936755,
+      "seconds": 0.6693164160242304
+    }
+  ],
+  "elapsed_seconds": 104.37231095798779,
+  "wave_relative_energy_drift": 3.113212152029327e-16,
+  "reaction_time_step_difference": 0.004204718668853924
+}

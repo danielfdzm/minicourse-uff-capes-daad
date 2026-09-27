@@ -1,0 +1,217 @@
+{
+  "problem": "-u'' = pi^2 sin(pi x), 0 < x < 1; u(0)=u(1)=0",
+  "exact_solution_for_diagnostics_only": "sin(pi x)",
+  "config": {
+    "dtype": "float64",
+    "float64_eps": 2.220446049250313e-16,
+    "diagnostic_grid_points": 1001,
+    "diagnostic_grid": "Same 1001-point uniform grid saved in forward_1d.npz",
+    "relative_l2_integration": "Composite trapezoidal rule on diagnostic grid",
+    "fd": {
+      "intervals": [
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024
+      ],
+      "scheme": "Second-order centered differences",
+      "linear_solver": "Thomas tridiagonal elimination",
+      "evaluation": "Piecewise linear interpolation of nodal solution (numpy.interp)"
+    },
+    "spectral": {
+      "degrees": [
+        8,
+        12,
+        16,
+        24,
+        32,
+        48
+      ],
+      "scheme": "Chebyshev-Lobatto polynomial collocation",
+      "linear_solver": "numpy.linalg.solve on interior differentiation matrix",
+      "evaluation": "Barycentric polynomial interpolation with Chebyshev-Lobatto weights"
+    }
+  },
+  "provenance": {
+    "command": "python3 experiments/classical_accuracy.py",
+    "python": "3.14.0 (v3.14.0:ebf955df7a8, Oct  7 2025, 08:20:14) [Clang 16.0.0 (clang-1600.0.26.6)]",
+    "numpy": "2.3.5",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "source_sha256": "ce23c6f8bafb46a6aeb623ffe7c19d4e880350c1bfe0b7f995b7379ff4da8f44",
+    "forward_npz_sha256": "761494a1cb4b89c0e7ea351d47a2b8bb1b0c4c4a0c98eb34a2fc44ad299f9b79",
+    "forward_json_sha256": "4b9fac8c1ee4c240ee0c021e48bed6143e83fd520dfc8032804f8201f0c61fde"
+  },
+  "methods": {
+    "fd": [
+      {
+        "intervals": 16,
+        "node_count": 17,
+        "free_dof": 15,
+        "relative_l2": 0.0014438507542228363,
+        "max_abs_error": 0.003218964440079519,
+        "nodal_residual_max_abs": 6.217248937900877e-14,
+        "nodal_residual_relative_inf": 6.299390213871842e-15,
+        "backward_error_inf": 5.994459896486546e-17
+      },
+      {
+        "intervals": 32,
+        "node_count": 33,
+        "free_dof": 31,
+        "relative_l2": 0.0003597247986346066,
+        "max_abs_error": 0.0008035776793697824,
+        "nodal_residual_max_abs": 2.0250467969162855e-13,
+        "nodal_residual_relative_inf": 2.0518013839468287e-14,
+        "backward_error_inf": 4.9281270995451203e-17
+      },
+      {
+        "intervals": 64,
+        "node_count": 65,
+        "free_dof": 63,
+        "relative_l2": 8.985391000880915e-05,
+        "max_abs_error": 0.00020082180969560604,
+        "nodal_residual_max_abs": 1.2576606422953773e-12,
+        "nodal_residual_relative_inf": 1.274276648977504e-13,
+        "backward_error_inf": 7.669990732226474e-17
+      },
+      {
+        "intervals": 128,
+        "node_count": 129,
+        "free_dof": 127,
+        "relative_l2": 2.2458648121922437e-05,
+        "max_abs_error": 5.020091591312337e-05,
+        "nodal_residual_max_abs": 7.227995979519619e-12,
+        "nodal_residual_relative_inf": 7.323491080069864e-13,
+        "backward_error_inf": 1.1026832421278414e-16
+      },
+      {
+        "intervals": 256,
+        "node_count": 257,
+        "free_dof": 255,
+        "relative_l2": 5.614360213313605e-06,
+        "max_abs_error": 1.254994550148325e-05,
+        "nodal_residual_max_abs": 2.1650237158610253e-11,
+        "nodal_residual_relative_inf": 2.1936276550477147e-12,
+        "backward_error_inf": 8.258495476577676e-17
+      },
+      {
+        "intervals": 512,
+        "node_count": 513,
+        "free_dof": 511,
+        "relative_l2": 1.4035711900665299e-06,
+        "max_abs_error": 3.1374687126106693e-06,
+        "nodal_residual_max_abs": 6.59809984426829e-11,
+        "nodal_residual_relative_inf": 6.6852728601158775e-12,
+        "backward_error_inf": 6.292359390352563e-17
+      },
+      {
+        "intervals": 1024,
+        "node_count": 1025,
+        "free_dof": 1023,
+        "relative_l2": 3.50891618658937e-07,
+        "max_abs_error": 7.843656864015003e-07,
+        "nodal_residual_max_abs": 2.689635181241101e-10,
+        "nodal_residual_relative_inf": 2.7251702012942207e-11,
+        "backward_error_inf": 6.41256986293173e-17
+      }
+    ],
+    "spectral": [
+      {
+        "degree": 8,
+        "node_count": 9,
+        "free_dof": 7,
+        "relative_l2": 1.2886322307326694e-07,
+        "max_abs_error": 1.70531010146302e-07,
+        "nodal_residual_max_abs": 1.9539925233402755e-14,
+        "nodal_residual_relative_inf": 1.9798083529311504e-15,
+        "backward_error_inf": 1.5941436373901298e-17
+      },
+      {
+        "degree": 12,
+        "node_count": 13,
+        "free_dof": 11,
+        "relative_l2": 1.589722524550036e-12,
+        "max_abs_error": 2.263744747210694e-12,
+        "nodal_residual_max_abs": 7.438494264988549e-14,
+        "nodal_residual_relative_inf": 7.536770434453812e-15,
+        "backward_error_inf": 1.2409874549670117e-17
+      },
+      {
+        "degree": 16,
+        "node_count": 17,
+        "free_dof": 15,
+        "relative_l2": 3.529558087860748e-15,
+        "max_abs_error": 4.218847493575595e-15,
+        "nodal_residual_max_abs": 1.149080830487037e-13,
+        "nodal_residual_relative_inf": 1.1642622984566709e-14,
+        "backward_error_inf": 6.1331016497341454e-18
+      },
+      {
+        "degree": 24,
+        "node_count": 25,
+        "free_dof": 23,
+        "relative_l2": 4.528917026328849e-15,
+        "max_abs_error": 5.662137425588298e-15,
+        "nodal_residual_max_abs": 3.0175861809311755e-13,
+        "nodal_residual_relative_inf": 3.057454035947083e-14,
+        "backward_error_inf": 3.2055219087366808e-18
+      },
+      {
+        "degree": 32,
+        "node_count": 33,
+        "free_dof": 31,
+        "relative_l2": 1.4557257729393135e-14,
+        "max_abs_error": 1.5765166949677223e-14,
+        "nodal_residual_max_abs": 2.3612362065605907e-12,
+        "nodal_residual_relative_inf": 2.3924324730786265e-13,
+        "backward_error_inf": 7.956797235544023e-18
+      },
+      {
+        "degree": 48,
+        "node_count": 49,
+        "free_dof": 47,
+        "relative_l2": 2.1591276042451972e-14,
+        "max_abs_error": 2.275957200481571e-14,
+        "nodal_residual_max_abs": 9.160713854150515e-12,
+        "nodal_residual_relative_inf": 9.281743707112923e-13,
+        "backward_error_inf": 6.1087070455763095e-18
+      }
+    ]
+  },
+  "saved_pinn_reference": {
+    "relative_l2": 2.1114329512847284e-06,
+    "max_abs_error": 3.084845488388055e-06,
+    "description": "Existing seed-7 hard-boundary PINN after Adam and L-BFGS",
+    "parameter_count": 1153,
+    "training_nodes": 128
+  },
+  "validation": {
+    "all_numeric_arrays_finite": true,
+    "fd_error_reduction_on_doubling": [
+      4.013764854975816,
+      4.003440680537326,
+      4.00086013730722,
+      4.000215032278327,
+      4.000053757905563,
+      4.000013438425232
+    ],
+    "fd_first_three_ratios_between_3_8_and_4_2": true,
+    "best_spectral_relative_l2_below_1e_minus_10": true,
+    "classical_nodal_boundaries_exactly_zero": true,
+    "solver_uses_exact_solution_labels": false
+  },
+  "notes": [
+    "This smooth, one-dimensional manufactured solution favors polynomial spectral methods.",
+    "The diagnostic grid is chosen independently of each solve, but some classical nodes coincide with it.",
+    "Free DOF excludes the two prescribed endpoint values; node count includes both endpoints.",
+    "Nodal residuals are algebraic PDE residuals at interior solver nodes, not continuous residual norms.",
+    "Relative residual = ||A u - f||_inf / ||f||_inf; normwise backward error divides by ||A||_inf ||u||_inf + ||f||_inf.",
+    "FD interpolation contributes to the reported solution error; linear interpolation retains second-order accuracy here.",
+    "Spectral errors need not decrease monotonically at high degree because floating-point roundoff and conditioning matter.",
+    "Machine epsilon is floating-point spacing near 1, not a guaranteed PDE solution error.",
+    "The saved PINN is one configuration and seed; this is not a universal method ranking or equal-cost/DOF comparison.",
+    "No timings are compared. A small algebraic residual does not remove discretization or interpolation error."
+  ]
+}

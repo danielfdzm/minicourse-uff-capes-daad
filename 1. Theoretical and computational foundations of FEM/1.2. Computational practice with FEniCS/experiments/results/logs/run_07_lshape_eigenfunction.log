@@ -1,0 +1,25 @@
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 7 (Line)
+Info    : [ 20%] Meshing curve 8 (Line)
+Info    : [ 40%] Meshing curve 9 (Line)
+Info    : [ 60%] Meshing curve 10 (Line)
+Info    : [ 70%] Meshing curve 11 (Line)
+Info    : [ 90%] Meshing curve 12 (Line)
+Info    : Done meshing 1D (Wall 0.000902375s, CPU 0.001036s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 0.0746175s, CPU 0.110515s)
+Info    : 2303 nodes 4610 elements
+Global dofs:   9009
+Boundary dofs: 400
+Interior dofs: 8609
+
+Lowest eigenvalues on the L-shaped domain:
+  lambda_1 = 9.64394203
+  lambda_2 = 15.19728740
+  lambda_3 = 19.73922346
+  lambda_4 = 29.52154127
+  lambda_5 = 31.92295347
+
+Saved lshape_eigenfunction_2d.png
+Saved lshape_eigenfunction_3d_matlab.png

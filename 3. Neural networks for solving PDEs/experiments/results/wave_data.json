@@ -1,0 +1,15 @@
+{
+  "equation": "u_tt = u_xx",
+  "exact_solution": "sin(pi*x)*cos(pi*t)",
+  "boundary_conditions": "u(t,0) = u(t,1) = 0",
+  "initial_conditions": "u(0,x) = sin(pi*x), u_t(0,x) = 0",
+  "sample_times": [
+    0.0,
+    0.25,
+    0.75
+  ],
+  "samples_per_snapshot": 9,
+  "noise_standard_deviation": 0.0,
+  "analytic_pde_residual_max_abs": 0.0,
+  "boundary_max_abs": 1.2246467991473532e-16
+}

@@ -1,0 +1,5 @@
+L2 error:       9.566619e-16
+H1 semi error:  4.984889e-15
+H1 error:       5.075857e-15
+Solutions saved to poisson_solution.png and poisson_solution_3d.png
+Solution exported to poisson_solution.xdmf (open in ParaView)

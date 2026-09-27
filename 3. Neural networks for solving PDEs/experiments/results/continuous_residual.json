@@ -1,0 +1,52 @@
+{
+  "equation": "-u'' + u/(1+u^2) = 0 on (0,1)",
+  "boundary_conditions": "u'(0)=u'(1)=0",
+  "unique_exact_solution": "u=0",
+  "uniqueness_proof": "Multiply by u and integrate: integral(|u'|^2 + u^2/(1+u^2)) = 0.",
+  "neural_sequence": "v_n(x) = (n/tanh(1))*tanh(0*x+1) = n",
+  "continuous_loss": "integral_0^1|-v_n''+v_n/(1+v_n^2)|^2 dx + |v_n'(0)|^2 + |v_n'(1)|^2",
+  "residual_l2_formula": "n/(1+n^2)",
+  "continuous_loss_formula": "n^2/(1+n^2)^2",
+  "solution_l2_error_formula": "n",
+  "metric_computation": "Closed-form continuous integrals; no quadrature or collocation.",
+  "plot_grid_role": "Used only to draw the spatial profiles.",
+  "training_performed": false,
+  "boundary_derivative_max_abs": 0.0,
+  "scope": "Unique exact solution, but no global coercivity; no claim of stability for arbitrary perturbed data.",
+  "n": [
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    16.0,
+    32.0,
+    64.0
+  ],
+  "residual_l2": [
+    0.5,
+    0.4,
+    0.23529411764705882,
+    0.12307692307692308,
+    0.0622568093385214,
+    0.03121951219512195,
+    0.015621186233829631
+  ],
+  "continuous_loss_values": [
+    0.25,
+    0.16000000000000003,
+    0.05536332179930796,
+    0.015147928994082842,
+    0.0038759103090130055,
+    0.0009746579417013682,
+    0.00024402145935198839
+  ],
+  "solution_l2_error": [
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    16.0,
+    32.0,
+    64.0
+  ]
+}

@@ -1,0 +1,8 @@
+  Step 10/50, t = 0.400
+  Step 20/50, t = 0.800
+  Step 30/50, t = 1.200
+  Step 40/50, t = 1.600
+  Step 50/50, t = 2.000
+Snapshots saved to heat_equation.png
+Diagnostics saved to heat_decay_metrics.png
+Final solution exported to heat_final.xdmf
