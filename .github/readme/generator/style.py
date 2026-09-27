@@ -1,4 +1,4 @@
-"""Shared look for the README graphics: the course palette and the slides' typeface."""
+"""Restrained scientific styling for the README graphics."""
 import subprocess
 
 import matplotlib
@@ -9,28 +9,20 @@ from matplotlib.colors import LinearSegmentedColormap
 import numpy as np
 from PIL import Image
 
-# Course palette (the \definecolor{FEM...} values of the Chapter 1 slides)
-NAVY = "#17365D"
-BLUE = "#2B6CB0"
-TEAL = "#1597A5"
-ORANGE = "#D7653B"
-LIGHT = "#F4F7FA"
-GRAY = "#5C6F82"
-PALE = "#EAF7F9"
+# Quiet, print-oriented palette shared by all README graphics.
+PAPER = "#FFFFFF"
+INK = "#273442"
+SECONDARY = "#526170"
+MUTED = "#65717C"
+GRID = "#E1E5E8"
+LABEL = "#526170"
+BLUE = "#4D708A"
+RUST = "#A47758"
+LIGHT = "#F3F5F6"
 
-# Text tokens on the navy surface
-INK_ON_DARK = "#FFFFFF"
-INK2_ON_DARK = "#C9D6E3"      # secondary text
-INK3_ON_DARK = "#8FA6BD"      # muted text / axis labels
-GRID_ON_DARK = "#2A4D78"      # hairline grid, one step off the navy surface
-KICKER = "#6CCAD3"            # FEMteal!70!white, as on the title slides
-
-# Teal and orange distinguish series on white and navy backgrounds.
-SERIES = (TEAL, ORANGE)
-
-# Sequential ramps (one hue each); on navy, larger values are brighter.
-TEAL_ON_DARK = LinearSegmentedColormap.from_list("teal_dark", ["#1E5775", TEAL, "#A9E6EA"])
-ORANGE_ON_DARK = LinearSegmentedColormap.from_list("orange_dark", ["#24406A", "#8A4A43", ORANGE, "#F6C9A8"])
+# Monotonic light-to-dark ramps: larger values have more visual weight.
+SOLUTION_CMAP = LinearSegmentedColormap.from_list("solution", ["#E5EBEF", "#98AFBE", "#4D708A"])
+ERROR_CMAP = LinearSegmentedColormap.from_list("error", ["#F5F2ED", "#C8AC94", "#916647"])
 
 def latin_modern(name):
     """Path of a Latin Modern OpenType file from the TeX installation, or None."""
@@ -85,13 +77,13 @@ def save_gif(frames, path, durations, colors=128):
                       loop=0, optimize=True, disposal=1)
 
 
-def style_dark_axes(ax):
-    ax.set_facecolor(NAVY)
+def style_axes(ax):
+    ax.set_facecolor(PAPER)
     for side in ("top", "right"):
         ax.spines[side].set_visible(False)
     for side in ("left", "bottom"):
-        ax.spines[side].set_color(GRID_ON_DARK)
-        ax.spines[side].set_linewidth(1.0)
-    ax.tick_params(colors=INK3_ON_DARK, labelsize=9, length=0, pad=4)
-    ax.grid(True, color=GRID_ON_DARK, linewidth=0.8, linestyle="-")
+        ax.spines[side].set_color(GRID)
+        ax.spines[side].set_linewidth(0.7)
+    ax.tick_params(colors=MUTED, labelsize=9, length=0, pad=4)
+    ax.grid(True, color=GRID, linewidth=0.5, linestyle="-")
     ax.set_axisbelow(True)

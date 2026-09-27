@@ -153,7 +153,8 @@ python -m jupyter lab Neural_PDE_Laboratory.ipynb
 
 ## About the README graphics
 
-The animations show a P1 finite element eigenfunction on an L-shaped domain, a network
+The graphics use a restrained palette and fixed viewpoints, with pauses to read each
+result. The animations show a P1 finite element eigenfunction on an L-shaped domain, a network
 fitting noisy data, and a PINN solving Poisson. To rerun the computations and rebuild
 the graphics, run `python .github/readme/generator/make_all.py` with NumPy, SciPy,
 Matplotlib, Pillow, and PyTorch installed.

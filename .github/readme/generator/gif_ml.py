@@ -6,8 +6,8 @@ import torch
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-from style import (NAVY, TEAL, ORANGE, INK_ON_DARK, INK2_ON_DARK, INK3_ON_DARK, GRID_ON_DARK, KICKER,
-                   use_course_fonts, fig_to_image, save_gif, style_dark_axes)
+from style import (PAPER, BLUE, RUST, INK, SECONDARY, MUTED, LABEL,
+                   use_course_fonts, fig_to_image, save_gif, style_axes)
 
 SEED, SIGMA, N_TRAIN, N_VAL, WIDTH, LR, STEPS = 3, 0.15, 40, 20, 48, 5e-3, 6000
 SIZE = (800, 450)
@@ -51,58 +51,58 @@ def train():
 def draw_frame(data, snap):
     step, pred, upto = snap
     hist = data["history"][:upto]
-    fig = plt.figure(figsize=(8, 4.5), dpi=200, facecolor=NAVY)
-    fig.text(0.045, 0.905, "CHAPTER 2  ·  MACHINE LEARNING", color=KICKER, fontsize=10, fontweight="bold")
-    fig.text(0.045, 0.835, "A small network learns a hidden function from noisy samples",
-             color=INK_ON_DARK, fontsize=16.5, fontweight="bold")
+    fig = plt.figure(figsize=(8, 4.5), dpi=200, facecolor=PAPER)
+    fig.text(0.045, 0.905, "CHAPTER 2  ·  MACHINE LEARNING", color=LABEL, fontsize=10, fontweight="bold")
+    fig.text(0.045, 0.835, "Neural network regression on noisy samples",
+             color=INK, fontsize=16, fontweight="normal")
     fig.text(0.045, 0.785, f"1–{WIDTH}–{WIDTH}–1 tanh network, {N_TRAIN} training samples, "
-             "mean-squared error, Adam", color=INK2_ON_DARK, fontsize=10)
+             "mean-squared error, Adam", color=SECONDARY, fontsize=10)
 
     # fit panel
     ax = fig.add_axes([0.075, 0.13, 0.50, 0.55])
-    style_dark_axes(ax)
-    ax.plot(data["grid"], target(data["grid"]), color=INK3_ON_DARK, linewidth=1.4, zorder=1)
-    ax.scatter(data["xt"], data["yt"], s=30, color=TEAL, edgecolors=NAVY, linewidths=1.4, zorder=3)
-    ax.scatter(data["xv"], data["yv"], s=30, color=ORANGE, edgecolors=NAVY, linewidths=1.4, zorder=3)
-    ax.plot(data["grid"], pred, color=INK_ON_DARK, linewidth=2.2, solid_capstyle="round", zorder=4)
+    style_axes(ax)
+    ax.plot(data["grid"], target(data["grid"]), color=MUTED, linewidth=1.4, linestyle="--", zorder=1)
+    ax.scatter(data["xt"], data["yt"], s=30, color=BLUE, edgecolors=PAPER, linewidths=1.4, zorder=3)
+    ax.scatter(data["xv"], data["yv"], s=30, marker="s", color=RUST, edgecolors=PAPER, linewidths=1.4, zorder=3)
+    ax.plot(data["grid"], pred, color=INK, linewidth=2.2, solid_capstyle="round", zorder=4)
     ax.set_xlim(0, 1); ax.set_ylim(-1.55, 1.55)
-    ax.set_xlabel("x", color=INK3_ON_DARK, fontsize=9, labelpad=2)
-    handles = [Line2D([], [], color=INK_ON_DARK, lw=2.2, label="network"),
-               Line2D([], [], color=INK3_ON_DARK, lw=1.4, label="hidden function"),
-               Line2D([], [], color=TEAL, marker="o", lw=0, ms=6, mec=NAVY, label="training data"),
-               Line2D([], [], color=ORANGE, marker="o", lw=0, ms=6, mec=NAVY, label="validation data")]
+    ax.set_xlabel("x", color=MUTED, fontsize=9, labelpad=2)
+    handles = [Line2D([], [], color=INK, lw=2.2, label="network"),
+               Line2D([], [], color=MUTED, lw=1.4, ls="--", label="hidden function"),
+               Line2D([], [], color=BLUE, marker="o", lw=0, ms=6, mec=PAPER, label="training data"),
+               Line2D([], [], color=RUST, marker="s", lw=0, ms=6, mec=PAPER, label="validation data")]
     leg = ax.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, 1.13), ncol=4, frameon=False,
-                    fontsize=8.5, handlelength=1.6, columnspacing=1.2, labelcolor=INK2_ON_DARK)
+                    fontsize=8.5, handlelength=1.6, columnspacing=1.2, labelcolor=SECONDARY)
 
     # loss panel: two series on one axis (same units)
     lx = fig.add_axes([0.665, 0.13, 0.30, 0.55])
-    style_dark_axes(lx)
+    style_axes(lx)
     lx.set_xscale("log"); lx.set_yscale("log")
     lx.set_xlim(1, 1.2e5); lx.set_ylim(2.5e-3, 1.5)          # room for the end labels
     lx.set_xticks([1, 10, 100, 1000, 10000])
-    lx.axhline(SIGMA ** 2, color=INK3_ON_DARK, linewidth=1.0)
-    lx.text(1.3, SIGMA ** 2 * 1.12, "noise level σ²", color=INK3_ON_DARK, fontsize=8.5, va="bottom")
+    lx.axhline(SIGMA ** 2, color=MUTED, linewidth=1.0)
+    lx.text(1.3, SIGMA ** 2 * 1.12, "noise level σ²", color=MUTED, fontsize=8.5, va="bottom")
     s, tr, va = hist[:, 0], hist[:, 1], hist[:, 2]
-    lx.plot(s, tr, color=TEAL, linewidth=2, zorder=3)
-    lx.plot(s, va, color=ORANGE, linewidth=2, zorder=3)
-    lx.legend(handles=[Line2D([], [], color=TEAL, lw=2, label="training"),
-                       Line2D([], [], color=ORANGE, lw=2, label="validation")],
-              loc="upper right", frameon=False, fontsize=8.5, handlelength=1.4, labelcolor=INK2_ON_DARK)
+    lx.plot(s, tr, color=BLUE, linewidth=2, zorder=3)
+    lx.plot(s, va, color=RUST, linestyle="--", linewidth=2, zorder=3)
+    lx.legend(handles=[Line2D([], [], color=BLUE, lw=2, label="training"),
+                       Line2D([], [], color=RUST, lw=2, ls="--", label="validation")],
+              loc="upper right", frameon=False, fontsize=8.5, handlelength=1.4, labelcolor=SECONDARY)
     # direct end labels only once the curves have separated (never stacked on each other)
     separated = abs(np.log10(tr[-1]) - np.log10(va[-1])) > 0.18
-    for series, colour, name in ((tr, TEAL, "training"), (va, ORANGE, "validation")):
-        lx.scatter(s[-1:], series[-1:], s=44, color=colour, edgecolors=NAVY, linewidths=1.6, zorder=4)
+    for series, colour, name in ((tr, BLUE, "training"), (va, RUST, "validation")):
+        lx.scatter(s[-1:], series[-1:], s=44, color=colour, edgecolors=PAPER, linewidths=1.6, zorder=4)
         if separated:
             lx.annotate(name, (s[-1], series[-1]), xytext=(7, -3), textcoords="offset points",
-                        color=INK2_ON_DARK, fontsize=8.5)
+                        color=SECONDARY, fontsize=8.5)
     best = int(np.argmin(va))
     if va[-1] > 1.6 * va[best]:                       # overfitting is visible: mark the checkpoint
-        lx.scatter([s[best]], [va[best]], s=90, facecolors="none", edgecolors=INK_ON_DARK, linewidths=1.6, zorder=5)
+        lx.scatter([s[best]], [va[best]], s=90, facecolors="none", edgecolors=INK, linewidths=1.6, zorder=5)
         lx.annotate("best checkpoint", (s[best], va[best]), xytext=(-8, -16), textcoords="offset points",
-                    color=INK_ON_DARK, fontsize=8.5, ha="right")
-    lx.set_xlabel("training step", color=INK3_ON_DARK, fontsize=9, labelpad=2)
-    fig.text(0.665, 0.715, "Mean-squared error", color=INK_ON_DARK, fontsize=10.5, fontweight="bold")
-    fig.text(0.045, 0.035, f"step {step:,}", color=INK_ON_DARK, fontsize=11)
+                    color=INK, fontsize=8.5, ha="right")
+    lx.set_xlabel("training step", color=MUTED, fontsize=9, labelpad=2)
+    fig.text(0.665, 0.715, "Mean-squared error", color=INK, fontsize=10.5, fontweight="bold")
+    fig.text(0.045, 0.035, f"step {step:,}", color=INK, fontsize=11)
     img = fig_to_image(fig, SIZE)
     plt.close(fig)
     return img
@@ -112,8 +112,9 @@ def main(out):
     use_course_fonts()
     data, snaps = train()
     frames = [draw_frame(data, sn) for sn in snaps]
-    durations = [130] * len(frames)
-    durations[-1] = 2600                               # hold the final state
+    durations = [220] * len(frames)
+    durations[0] = 1800
+    durations[-1] = 4000                               # hold the final state
     save_gif(frames, out, durations)
 
 
