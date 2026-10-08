@@ -21,6 +21,7 @@ The chapter covers PINNs, Deep Ritz, weak formulations, and inverse problems:
 |---|---|
 | [`experiments/`](experiments) | the scripts, saved results and figures behind the numbers on the slides; see [`experiments/README.md`](experiments/README.md) for configurations, measured results and how to reproduce them |
 | [`Neural_PDE_Laboratory.ipynb`](Neural_PDE_Laboratory.ipynb) | index of seven independent notebooks covering 13 experiments, with saved plots; see [`NOTEBOOK_README.md`](NOTEBOOK_README.md) |
+| [`exercises/`](exercises/README.md) | six self-contained practical exercises, one for each course section, with editable baselines, checks, and expected deliverables |
 | [`notebook_outputs/`](notebook_outputs) | the laboratory's figures (PNG and PDF) and seven interactive HTML explorers; open `index.html` in a browser |
 
 ## Laboratory notebooks
@@ -34,6 +35,13 @@ The chapter covers PINNs, Deep Ritz, weak formulations, and inverse problems:
 | [05 · Reaction–diffusion patterns](Neural_PDE_05_reaction_diffusion.ipynb) | 9 |
 | [06 · Fourier features and adaptive collocation](Neural_PDE_06_features_and_sampling.ipynb) | 10–11 |
 | [07 · Heat flow and parameter-conditioned PINNs](Neural_PDE_07_time_and_parameters.ipynb) | 12–13 |
+
+## Practical exercises
+
+The [exercise guide](exercises/README.md) maps each course section to a practical
+notebook. Start with [01 · From observations to a PDE loss](exercises/Neural_PDE_Exercise_01_data_to_pde.ipynb)
+or choose a section independently. Each notebook provides a runnable baseline,
+settings to vary, checks, hints, and a concrete table or plot to produce.
 
 ## Quick start
 

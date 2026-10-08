@@ -11,4 +11,14 @@ The examples in 1.2 build on the theory in 1.1. You will solve the Poisson probl
 check convergence rates, refine a mesh near a corner, and step the heat equation
 forward in time.
 
+## Laboratory and practical exercises
+
+| Part | Worked notebooks | Practical exercises |
+|---|---|---|
+| **1.1** | [Assembly, convergence, adaptivity and heat flow](1.1.%20Theoretical%20foundations/NOTEBOOK_README.md), implemented in NumPy/SciPy | [Nine section tasks](1.1.%20Theoretical%20foundations/exercises/README.md), from manufactured solutions to a verification report |
+| **1.2** | [Poisson and heat in FEniCSx](1.2.%20Computational%20practice%20with%20FEniCS/NOTEBOOK_README.md) | [Part I and Part II](1.2.%20Computational%20practice%20with%20FEniCS/exercises/README.md), covering all eleven examples |
+
+Each notebook runs independently and includes saved plots. The guides describe
+the Python or FEniCSx environment and map practical tasks to the slides.
+
 **Next chapter:** [2. Fundamentals of Machine Learning](../2.%20Fundamentals%20of%20Machine%20Learning)

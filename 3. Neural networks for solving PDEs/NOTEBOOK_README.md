@@ -20,6 +20,15 @@ JavaScript and animation data. Their saved figures and diagnostics can be browse
 on GitHub; interactive explorers remain available as standalone offline HTML files.
 Download `notebook_outputs/` and open [index.html](notebook_outputs/index.html) in a browser.
 
+## Practical exercises
+
+The [six exercise notebooks](exercises/README.md) cover every chapter section with
+editable baselines, independent checks, and learner deliverables. They use the
+same CPU / float64 setup and plotting style as the laboratory. Start with
+[observations and PDE losses](exercises/Neural_PDE_Exercise_01_data_to_pde.ipynb),
+or choose any exercise from the section mapping in the guide. Each runs in a fresh
+kernel without laboratory data; its plots stay inside the notebook.
+
 ## Run a notebook
 
 Use Python 3.11 or newer. From this folder (`3. Neural networks for solving PDEs/`):
@@ -40,7 +49,7 @@ Runtime and numerical diagnostics are recorded separately for each notebook.
 
 ## Outputs
 
-All notebooks write to `notebook_outputs/` in the kernel's working directory:
+All seven laboratory notebooks write to `notebook_outputs/` in the kernel's working directory:
 
 - Static figure sets as PNG and vector PDF, with saved PNG previews in the notebooks.
 - Seven self-contained interactive HTML explorers across the collection: membrane
@@ -64,6 +73,7 @@ or a PDE parameter as an axis. Exact solutions check errors after forward traini
 
 Edit source cells in `experiments/notebook_parts/`. The builder inserts the shared
 setup into each notebook, assigns experiments to parts, and generates the index.
+The notebooks under `exercises/` are edited directly and are not managed by this builder.
 To rebuild and execute all seven in separate fresh kernels:
 
 ```sh

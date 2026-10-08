@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <b>Lecture slides, runnable FEniCSx examples and neural-PDE laboratory notebooks</b><br>
+  <b>Lecture slides, worked experiments and practical exercise notebooks</b><br>
   <a href="#1-theoretical-and-computational-foundations-of-fem">Finite elements</a> &nbsp;·&nbsp;
   <a href="#2-fundamentals-of-machine-learning">Machine learning</a> &nbsp;·&nbsp;
   <a href="#3-neural-networks-for-solving-pdes">Neural networks for PDEs</a> &nbsp;·&nbsp;
@@ -21,10 +21,10 @@ with classical methods and show how observations help recover unknown coefficien
 
 | | Chapter | Slides (PDF) | Hands-on |
 |:-:|---|---|---|
-| **1.1** | [Theoretical foundations of FEM](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.1.%20Theoretical%20foundations) | [Finite element methods: foundations](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.1.%20Theoretical%20foundations/1.1_fem_foundations.pdf) · 69 slides | |
-| **1.2** | [Computational practice with FEniCS](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.2.%20Computational%20practice%20with%20FEniCS) | [Part I](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.2.%20Computational%20practice%20with%20FEniCS/1.2_fenics_part1.pdf) · 38 slides<br>[Part II](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.2.%20Computational%20practice%20with%20FEniCS/1.2_fenics_part2.pdf) · 35 slides | 14 Python examples |
-| **2** | [Fundamentals of Machine Learning](2.%20Fundamentals%20of%20Machine%20Learning) | [Neural networks for supervised regression](2.%20Fundamentals%20of%20Machine%20Learning/2_machine_learning_fundamentals.pdf) · 80 slides | |
-| **3** | [Neural networks for solving PDEs](3.%20Neural%20networks%20for%20solving%20PDEs) | [From data-driven regression to PINNs, Deep Ritz and hybrid losses](3.%20Neural%20networks%20for%20solving%20PDEs/3_neural_networks_for_pdes.pdf) · 83 slides | slide experiments, [lab notebooks](3.%20Neural%20networks%20for%20solving%20PDEs/NOTEBOOK_README.md) |
+| **1.1** | [Theoretical foundations of FEM](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.1.%20Theoretical%20foundations) | [Finite element methods: foundations](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.1.%20Theoretical%20foundations/1.1_fem_foundations.pdf) · 69 slides | [2 labs](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.1.%20Theoretical%20foundations/NOTEBOOK_README.md), [exercises](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.1.%20Theoretical%20foundations/exercises) |
+| **1.2** | [Computational practice with FEniCS](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.2.%20Computational%20practice%20with%20FEniCS) | [Part I](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.2.%20Computational%20practice%20with%20FEniCS/1.2_fenics_part1.pdf) · 38 slides<br>[Part II](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.2.%20Computational%20practice%20with%20FEniCS/1.2_fenics_part2.pdf) · 35 slides | 14 Python examples, [lab](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.2.%20Computational%20practice%20with%20FEniCS/NOTEBOOK_README.md), [exercises](1.%20Theoretical%20and%20computational%20foundations%20of%20FEM/1.2.%20Computational%20practice%20with%20FEniCS/exercises) |
+| **2** | [Fundamentals of Machine Learning](2.%20Fundamentals%20of%20Machine%20Learning) | [Neural networks for supervised regression](2.%20Fundamentals%20of%20Machine%20Learning/2_machine_learning_fundamentals.pdf) · 80 slides | [3 labs](2.%20Fundamentals%20of%20Machine%20Learning/NOTEBOOK_README.md), [exercises](2.%20Fundamentals%20of%20Machine%20Learning/exercises) |
+| **3** | [Neural networks for solving PDEs](3.%20Neural%20networks%20for%20solving%20PDEs) | [From data-driven regression to PINNs, Deep Ritz and hybrid losses](3.%20Neural%20networks%20for%20solving%20PDEs/3_neural_networks_for_pdes.pdf) · 83 slides | slide experiments, [7 labs](3.%20Neural%20networks%20for%20solving%20PDEs/NOTEBOOK_README.md), [exercises](3.%20Neural%20networks%20for%20solving%20PDEs/exercises) |
 
 ---
 
@@ -50,6 +50,11 @@ L-shaped eigenproblem, the heat equation, a nonlinear Poisson equation and Stoke
 PDE-constrained optimal control and a coupled reaction–diffusion system. Every example
 has a script in `experiments/`.
 
+The laboratory notebooks make assembly, convergence, adaptive refinement and
+heat stepping visible in small numerical experiments. The FEniCSx laboratory then
+implements Poisson and heat problems using the same environment as the scripts.
+Each part has an `exercises/` folder with section-by-section practical tasks.
+
 <p align="center">
   <img src=".github/readme/chapter1_highlights.png" alt="Chapter 1 highlights: tetrahedral meshes of the unit cube, Stokes flow in a lid-driven cavity, Gray–Scott reaction–diffusion patterns" width="100%">
 </p>
@@ -68,6 +73,12 @@ has a script in `experiments/`.
 classes and the universal approximation theorems (Cybenko, Pinkus), gradient descent and
 backpropagation, regularisation and early stopping, width and depth, and validation and
 testing without leakage.
+
+**[Machine Learning Laboratory](2.%20Fundamentals%20of%20Machine%20Learning/NOTEBOOK_README.md)**
+&nbsp;·&nbsp; Three worked notebooks follow the slide dataset from least squares to
+neural approximation, optimisation and model selection. The companion
+[practicals](2.%20Fundamentals%20of%20Machine%20Learning/exercises) ask you to change
+the experiments, check gradients and compare validation results before testing.
 
 <p align="center">
   <img src=".github/readme/chapter2_highlights.png" alt="Chapter 2 highlights: from biological to artificial neurons, universal approximation with wider layers, underfitting and overfitting" width="100%">
@@ -96,6 +107,10 @@ notebooks include saved static plots for convenient GitHub previews. To browse t
 figures and seven interactive plots, download
 `notebook_outputs/` and open `index.html` in a browser.
 
+The [practical exercises](3.%20Neural%20networks%20for%20solving%20PDEs/exercises)
+cover all six lecture sections, from putting a PDE into a loss to checking a trained
+solution on independent points. Each includes a working baseline and tasks to extend it.
+
 <p align="center">
   <img src=".github/readme/chapter3_highlights.png" alt="Chapter 3 highlights: a 2D Poisson PINN with its error and residual, a mesh-free solution on an annulus, an inverse problem's solution family and valley" width="100%">
 </p>
@@ -109,30 +124,68 @@ figures and seven interactive plots, download
 ├── 1. Theoretical and computational foundations of FEM/
 │   ├── 1.1. Theoretical foundations/
 │   │   ├── 1.1_fem_foundations.tex / .pdf        slides
+│   │   ├── FEM_01_*.ipynb / FEM_02_*.ipynb      worked numerical experiments
+│   │   ├── NOTEBOOK_README.md                    notebook guide and setup
+│   │   ├── requirements-notebook.txt             NumPy/SciPy notebook environment
+│   │   ├── exercises/                            practical tasks and README
 │   │   └── figures/                              figures of the slides
 │   └── 1.2. Computational practice with FEniCS/
 │       ├── 1.2_fenics_part1.tex / .pdf           Part I: from weak forms to working code
 │       ├── 1.2_fenics_part2.tex / .pdf           Part II: advanced PDE examples
 │       ├── environment.yml                       FEniCSx environment
+│       ├── FEniCSx_01_poisson_and_heat.ipynb     worked FEniCSx experiment
+│       ├── NOTEBOOK_README.md                    notebook guide and setup
+│       ├── requirements-notebook.txt             notebook tools for that environment
+│       ├── exercises/                            Part I and Part II practicals
 │       └── experiments/                          example scripts 01–14
 │           ├── figures/                          their plots, used by the slides
 │           └── results/                          XDMF/HDF5 fields, CSV tables, run logs
 ├── 2. Fundamentals of Machine Learning/
 │   ├── 2_machine_learning_fundamentals.tex / .pdf
+│   ├── ML_01_*.ipynb … ML_03_*.ipynb            three worked experiments
+│   ├── NOTEBOOK_README.md                        notebook guide and setup
+│   ├── requirements-notebook.txt                 machine-learning notebook environment
+│   ├── exercises/                                three practical notebooks and README
 │   └── figures/
 └── 3. Neural networks for solving PDEs/
     ├── 3_neural_networks_for_pdes.tex / .pdf
     ├── experiments/                              scripts, results and figures behind the slides
     ├── Neural_PDE_Laboratory.ipynb               laboratory index
     ├── Neural_PDE_01_*.ipynb … Neural_PDE_07_*.ipynb  seven executed lab notebooks
+    ├── exercises/                                six section practicals and README
     └── notebook_outputs/                         figures and interactive HTML explorers
 ```
 
 Each chapter folder has its own README with more detail.
 
+Worked notebooks sit beside the slides. Practical notebooks and their section
+coverage tables live in each chapter or part's `exercises/` folder. Slide scripts,
+figures and saved laboratory outputs retain their existing locations.
+
 ## Getting started
 
 **Read the slides.** The PDFs sit next to their LaTeX sources (see the table above).
+
+**Run the FEM foundations laboratory** (Chapter 1.1, Python 3.11+):
+
+```sh
+cd "1. Theoretical and computational foundations of FEM/1.1. Theoretical foundations"
+python -m pip install -r requirements-notebook.txt
+python -m jupyter lab FEM_01_assembly_and_convergence.ipynb
+```
+
+**Run the machine-learning laboratory** (Chapter 2):
+
+```sh
+cd "2. Fundamentals of Machine Learning"
+python -m pip install -r requirements-notebook.txt
+python -m jupyter lab ML_01_regression_and_risk.ipynb
+```
+
+Run each command block from the repository root. In Jupyter, select **Restart Kernel
+and Run All Cells** to reproduce a baseline. Open the notebooks in `exercises/` for
+the practical tasks: record your prediction, edit the supplied baseline, then explain
+the measured result. The exercise READMEs map every lecture section to its tasks.
 
 **Rebuild a deck.** From the deck's folder, run `latexmk -pdf <deck>.tex`. This needs a TeX
 distribution with Beamer, TikZ/PGFPlots, `listings` and `lmodern`; the FEniCS decks also
@@ -145,6 +198,9 @@ cd "1. Theoretical and computational foundations of FEM/1.2. Computational pract
 conda env create -f environment.yml
 conda activate fenicsx-env
 python experiments/01_poisson.py
+# Add Jupyter to the same environment to run the laboratory and practicals:
+python -m pip install -r requirements-notebook.txt
+python -m jupyter lab FEniCSx_01_poisson_and_heat.ipynb
 ```
 
 The scripts write to `experiments/figures/` and `experiments/results/` from any working

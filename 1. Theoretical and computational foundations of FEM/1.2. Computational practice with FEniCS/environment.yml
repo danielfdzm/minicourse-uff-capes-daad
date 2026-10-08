@@ -8,7 +8,7 @@ channels:
   - conda-forge
 dependencies:
   - python>=3.11
-  - fenics-dolfinx>=0.10
+  - fenics-dolfinx>=0.10,<0.11
   - mpich
   - pyvista
   - scipy

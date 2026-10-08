@@ -1,0 +1,9 @@
+# Python 3.11+; CPU execution is sufficient for all Chapter 2 notebooks.
+numpy>=1.26
+matplotlib>=3.8
+torch>=2.2
+ipython>=8
+jupyterlab>=4
+nbformat>=5.10
+nbclient>=0.10
+ipykernel>=6

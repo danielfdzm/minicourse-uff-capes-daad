@@ -18,6 +18,16 @@ form to a finite element solution and an estimate of the error.
 | Evolution PDEs: space and time | the weak heat equation, semi-discretisation, forward and backward Euler, Crank–Nicolson, stability, balancing space and time errors |
 | Checking the solution | checks before trusting a simulation |
 
+## Laboratory and practical exercises
+
+The [laboratory guide](NOTEBOOK_README.md) introduces two self-contained NumPy/SciPy
+notebooks with saved plots: [assembly and convergence](FEM_01_assembly_and_convergence.ipynb)
+and [adaptivity and heat flow](FEM_02_adaptivity_and_heat.ipynb). They make the
+matrices and error checks explicit before the FEniCSx implementation in Chapter 1.2.
+
+The [practical exercises](exercises/README.md) cover all nine sections above, with
+editable baselines, hints and a final verification report.
+
 ## Build
 
 ```sh

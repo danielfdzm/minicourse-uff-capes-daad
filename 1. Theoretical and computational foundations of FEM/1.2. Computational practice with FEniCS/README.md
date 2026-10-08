@@ -31,6 +31,17 @@ figures; the Part II slides show the finite element formulation you would write 
 Solution fields (XDMF/HDF5, for ParaView) and CSV tables are written to
 `experiments/results/`. Console output from earlier runs is kept in `results/logs/`.
 
+## Laboratory and practical exercises
+
+The [Poisson and heat notebook](FEniCSx_01_poisson_and_heat.ipynb) implements the
+weak forms, compares P1/P2 errors and explores time stepping. See the
+[laboratory guide](NOTEBOOK_README.md) for its environment and kernel setup.
+
+The [practical exercise guide](exercises/README.md) maps all eleven examples to
+two notebooks, one per deck. They include editable baselines, checks and expected
+deliverables. Saved static plots can be read on GitHub; rerunning the notebooks
+does not overwrite the slide figures or result files.
+
 ## Run the examples
 
 ```sh

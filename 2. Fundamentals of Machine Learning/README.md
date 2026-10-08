@@ -18,6 +18,32 @@ neural networks in PyTorch and check how well they predict unseen data.
 
 Use the footer IDs (`L2-S01` … `L2-S80`) to refer to individual slides.
 
+## Notebooks
+
+The [Machine Learning Laboratory](NOTEBOOK_README.md) contains three
+self-contained worked notebooks. Each generates its own data and includes saved
+static plots that can be read on GitHub.
+
+| Notebook | What to explore |
+|---|---|
+| [01 · Regression and risk](ML_01_regression_and_risk.ipynb) | least squares, noisy interpolation, population risk and repeated datasets |
+| [02 · Networks and optimisation](ML_02_networks_and_optimisation.ipynb) | constructive ReLU approximation, shapes, autograd, learning rates and optimiser comparisons |
+| [03 · Regularisation and selection](ML_03_regularisation_and_selection.ipynb) | L1/L2/elastic net, ridge penalties, early stopping, repeated seeds and final test metrics |
+
+Separate [practical exercise notebooks](exercises/README.md) cover all six slide
+ranges above with editable starter code, hints, feedback and interpretation tasks.
+They run independently of the worked examples.
+
+Use Python 3.11 or newer. From this folder:
+
+```sh
+python -m pip install -r requirements-notebook.txt
+python -m jupyter lab ML_01_regression_and_risk.ipynb
+```
+
+Select **Restart Kernel and Run All Cells**. See the
+[notebook guide](NOTEBOOK_README.md) for data, runtime and evaluation conventions.
+
 ## Build
 
 ```sh
