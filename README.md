@@ -3,6 +3,16 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/danielfdzm/minicourse-uff-capes-daad/commits/main"><img src="https://img.shields.io/github/last-commit/danielfdzm/minicourse-uff-capes-daad" alt="GitHub last commit"></a>
+  <a href="https://github.com/danielfdzm/minicourse-uff-capes-daad"><img src="https://img.shields.io/github/repo-size/danielfdzm/minicourse-uff-capes-daad" alt="GitHub repo size"></a>
+  <img src="https://img.shields.io/badge/Python-3-3776AB?logo=python&logoColor=white" alt="Python 3">
+  <img src="https://img.shields.io/badge/FEniCS-legacy%20%26%20FEniCSx-E95420" alt="FEniCS and FEniCSx">
+  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white" alt="PyTorch">
+  <img src="https://img.shields.io/badge/notebooks-Jupyter-F37626?logo=jupyter&logoColor=white" alt="Jupyter notebooks">
+  <img src="https://img.shields.io/badge/slides-305%20pages-B31B1B" alt="305 slides">
+</p>
+
+<p align="center">
   <b>Lecture slides, worked experiments and practical exercise notebooks</b><br>
   <a href="#1-theoretical-and-computational-foundations-of-fem">Finite elements</a> &nbsp;·&nbsp;
   <a href="#2-fundamentals-of-machine-learning">Machine learning</a> &nbsp;·&nbsp;
